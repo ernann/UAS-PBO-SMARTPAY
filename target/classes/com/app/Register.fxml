@@ -15,20 +15,13 @@
             <Label text="Register" 
                    style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #002B6B;"/>
 
-            <!-- Input Smartpay ID -->
-            <TextField fx:id="txtSmartId" promptText="Smartpay ID"
-                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
-                       prefWidth="300"/>
-
-            <!-- Input Email -->
-            <TextField fx:id="txtEmail" promptText="Email"
-                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
-                       prefWidth="300"/>
-
-            <!-- Input Password -->
-            <PasswordField fx:id="txtPassword" promptText="Password"
-                           style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
-                           prefWidth="300"/>
+            <!-- Input Fields -->
+            <TextField fx:id="txtSmartId" promptText="Smartpay ID" prefWidth="300"
+                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"/>
+            <TextField fx:id="txtEmail" promptText="Email" prefWidth="300"
+                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"/>
+            <PasswordField fx:id="txtPassword" promptText="Password" prefWidth="300"
+                           style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"/>
 
             <!-- Checklist Password -->
             <VBox spacing="5" alignment="TOP_LEFT" prefWidth="300">
@@ -38,21 +31,17 @@
                 <Text fx:id="checkNumber" text="• Angka (0-9)"/>
             </VBox>
 
-            <!-- Repeat Password -->
-            <PasswordField fx:id="txtRepeatPassword" promptText="Ulangi Password"
-                           style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
-                           prefWidth="300"/>
+            <PasswordField fx:id="txtRepeatPassword" promptText="Ulangi Password" prefWidth="300"
+                           style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"/>
 
-            <!-- Agreement Checkbox -->
-            <HBox spacing="10" alignment="CENTER_LEFT" prefWidth="300">
-                <CheckBox fx:id="cbAgreement"/>
-                <Label text="Saya telah membaca dan menyetujui Persyaratan umum"
-                       style="-fx-text-fill: #002B6B; -fx-font-size: 13px;"/>
-            </HBox>
-
-            <!-- Tombol Next -->
+            <!-- Tombol Next (besar) -->
             <Button fx:id="btnNext" text="Next" onAction="#handleNext"
                     style="-fx-background-color: #003B94; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 12;"
+                    prefWidth="300" prefHeight="40"/>
+
+            <!-- Tombol Back (sama style dengan Register di Login) -->
+            <Button fx:id="btnBack" text="Back" onAction="#handleBack"
+                    style="-fx-background-color: transparent;-fx-border-color: #003B94; -fx-text-fill: #003B94; -fx-font-size: 16px; -fx-background-radius: 12; -fx-border-radius: 12;"
                     prefWidth="300" prefHeight="40"/>
         </VBox>
     </center>
