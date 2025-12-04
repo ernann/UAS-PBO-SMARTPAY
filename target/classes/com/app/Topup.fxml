@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="650.0" prefWidth="400.0"
+            style="-fx-background-color: #D6ECFA;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.app.TopupController">
+
+    <VBox spacing="20" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <!-- HEADER (BACK BUTTON) -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Button fx:id="backButton" text="←" style="-fx-font-size: 24; -fx-background-color: transparent;"/>
+            <Label text="Top Up" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <!-- CARD -->
+        <VBox spacing="15" style="-fx-background-color: #1e3a67; -fx-background-radius: 12; -fx-padding: 20;">
+            <Label text="Pilih Metode Top Up"
+                   style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+            <GridPane hgap="12" vgap="12">
+                <VBox alignment="CENTER" spacing="5" prefWidth="90" prefHeight="70" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                      style="-fx-background-color: white; -fx-background-radius: 8;">
+                    <Button text="BCA OneKlik" onAction="#handleBCAOneklik"
+                            style="-fx-background-color: transparent; -fx-font-size: 12;"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="5" prefWidth="90" prefHeight="70" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                      style="-fx-background-color: white; -fx-background-radius: 8;">
+                    <Button text="BRI Direct Debit" onAction="#handleBRIDirectDebit"
+                            style="-fx-background-color: transparent; -fx-font-size: 12;"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="5" prefWidth="90" prefHeight="70" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                      style="-fx-background-color: white; -fx-background-radius: 8;">
+                    <Button text="Blu BCA Digital" onAction="#handleBluBCA"
+                            style="-fx-background-color: transparent; -fx-font-size: 12;"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="5" prefWidth="90" prefHeight="70" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                      style="-fx-background-color: white; -fx-background-radius: 8;">
+                    <Button text="Alfamart" onAction="#handleAlfamart"
+                            style="-fx-background-color: transparent; -fx-font-size: 12;"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="5" prefWidth="90" prefHeight="70" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                      style="-fx-background-color: white; -fx-background-radius: 8;">
+                    <Button text="Lawson" onAction="#handleLawson"
+                            style="-fx-background-color: transparent; -fx-font-size: 12;"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="5" prefWidth="90" prefHeight="70" GridPane.columnIndex="2" GridPane.rowIndex="1"
+                      style="-fx-background-color: white; -fx-background-radius: 8;">
+                    <Button text="Indomaret" onAction="#handleIndomaret"
+                            style="-fx-background-color: transparent; -fx-font-size: 12;"/>
+                </VBox>
+            </GridPane>
+        </VBox>
+
+        <!-- LOG -->
+        <VBox fx:id="logContainer" spacing="5" style="-fx-padding: 10;"/>
+    </VBox>
+</AnchorPane>

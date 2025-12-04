@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.app.LoginController"
+            style="-fx-background-color: #D6ECFA;">
+
+    <center>
+        <VBox spacing="15" alignment="CENTER">
+            <padding><Insets top="30" bottom="30" left="40" right="40"/></padding>
+
+            <Label text="SmartPay Login"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #002B6B;"/>
+
+            <TextField fx:id="txtEmail" promptText="Email"
+                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
+                       prefWidth="300"/>
+
+            <PasswordField fx:id="txtPassword" promptText="Password"
+                           style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
+                           prefWidth="300"/>
+
+            <Hyperlink text="Forgot Password?" onAction="#handleForgotPassword"
+                       style="-fx-text-fill: #003B94; -fx-font-size: 13px; -fx-padding: 0;" />
+
+            <Button text="Login" onAction="#handleLogin"
+                    style="-fx-background-color: #003B94; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 12;"
+                    prefWidth="300" prefHeight="40"/>
+
+            <Button text="Register" onAction="#handleRegister"
+                    style="-fx-background-color: transparent; -fx-border-color: #003B94; -fx-text-fill: #003B94; -fx-font-size: 16px; -fx-background-radius: 12; -fx-border-radius: 12;"
+                    prefWidth="300" prefHeight="40"/>
+        </VBox>
+    </center>
+
+</BorderPane>
