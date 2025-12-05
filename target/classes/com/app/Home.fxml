@@ -139,7 +139,7 @@
                 <HBox alignment="CENTER" spacing="30">
                     <children>
 
-                        <Button alignment="CENTER" contentDisplay="TOP" onAction="#handleReminder"
+                        <Button alignment="CENTER" contentDisplay="TOP" fx:id="btnReminder" onAction="#handleReminder"
                                 prefHeight="120" prefWidth="120"
                                 style="-fx-background-color: #0d47a1; -fx-background-radius: 15;"
                                 text="Reminder" textFill="WHITE">
