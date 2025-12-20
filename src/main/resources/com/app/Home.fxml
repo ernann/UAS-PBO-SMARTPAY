@@ -121,7 +121,7 @@
                         <Button alignment="CENTER" contentDisplay="TOP" onAction="#handlePembayaran"
                                 prefHeight="120" prefWidth="120"
                                 style="-fx-background-color: #0d47a1; -fx-background-radius: 15;"
-                                text="Pembayaran" textFill="WHITE">
+                                text="Transfer" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="40" fitWidth="40" preserveRatio="true">
                                     <image><Image url="https://img.icons8.com/ios-filled/50/ffffff/bank-card.png"/></image>

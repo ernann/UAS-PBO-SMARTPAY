@@ -1,13 +1,21 @@
-package com.app;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+package com.app.Reminder;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.ArrayList;
+
+import com.app.App;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+
 
 public class ReminderController {
 
@@ -20,7 +28,6 @@ public class ReminderController {
 
     @FXML
     public void initialize() {
-        // Load data reminder dari file
         reminderList = ReminderStorage.load();
         setupListView();
         refreshList();
@@ -58,7 +65,6 @@ public class ReminderController {
         listReminder.getItems().clear();
         LocalDate now = LocalDate.now();
         for (Reminder r : reminderList) {
-            // tampilkan hanya yang jatuh tempo bulan ini
             if (r.getJatuhTempo().getMonth() == now.getMonth()) {
                 listReminder.getItems().add(r);
             }
@@ -95,7 +101,7 @@ public class ReminderController {
     }
 
     @FXML
-    private void handleBack() {
+    public void handleBack() {
         App.setRoot("Home");
     }
 

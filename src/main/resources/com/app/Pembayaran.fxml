@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/13"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.app.Transfer.PembayaranController"
+            prefWidth="400"
+            prefHeight="600"
+            style="-fx-background-color: #10266F;">
+
+    <children>
+
+        <VBox spacing="18"
+              layoutX="20"
+              layoutY="20"
+              prefWidth="360">
+
+                   <Button text="Kembali"
+                    onAction="#handleBack"
+                    style="-fx-background-color: #B9CFF1;
+                           -fx-text-fill: #10266F;
+                           -fx-padding: 6 18;
+                           -fx-background-radius: 20;" />
+          
+            <!-- Judul Halaman -->
+            <Label text="Transfer"
+                   maxWidth="Infinity"
+                   alignment="CENTER"
+                   style="-fx-font-size: 30;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #D3FBFF;" />
+
+          <HBox alignment="CENTER">
+    <Button text="Penerima Baru +"
+            prefWidth="150"
+            prefHeight="45"
+            onAction="#handlePenerimaBaru"
+            style="-fx-background-color: #B9CFF1;
+                   -fx-text-fill: #10266F;
+                   -fx-font-size: 16;
+                   -fx-font-weight: bold;
+                   -fx-background-radius: 15;" />
+</HBox>
+
+
+            <Label text="Riwayat Penerima"
+                   style="-fx-text-fill: white;
+                          -fx-font-size: 16;
+                          -fx-font-weight: bold;" />
+
+            <ListView fx:id="listRiwayat"
+                      prefHeight="320"
+                      style="-fx-control-inner-background: white;
+                             -fx-background-radius: 20;
+                             -fx-control-inner-background-radius: 20;
+                             -fx-padding: 10;" />
+
+        </VBox>
+
+    </children>
+
+</AnchorPane>

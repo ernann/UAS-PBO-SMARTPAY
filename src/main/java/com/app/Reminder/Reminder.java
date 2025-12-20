@@ -1,5 +1,4 @@
-package com.app;
-
+package com.app.Reminder;
 import java.io.Serializable;
 import java.time.LocalDate;
 

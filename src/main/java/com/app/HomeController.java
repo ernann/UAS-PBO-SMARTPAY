@@ -1,13 +1,14 @@
 package com.app;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.input.MouseEvent;
-
 import java.time.LocalDate;
 import java.util.List;
 
+import com.app.Reminder.Reminder;
+import com.app.Reminder.ReminderStorage;
+
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 
 public class HomeController {
 
@@ -45,7 +46,7 @@ public class HomeController {
 
     @FXML
     private void handleReminder(ActionEvent event) {
-        App.setRoot("Reminder");
+    App.setRoot("Reminder"); // Reminder.fxml
     }
 
     @FXML
@@ -55,7 +56,7 @@ public class HomeController {
 
     @FXML
     private void handlePembayaran(ActionEvent event) {
-        // App.setRoot("Pembayaran");
+        App.setRoot("Pembayaran");
     }
 
     @FXML

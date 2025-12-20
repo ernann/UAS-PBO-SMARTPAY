@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/13"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.app.Transfer.FormPembayaranController"
+            prefWidth="400"
+            prefHeight="600"
+            style="-fx-background-color: #B9CFF1;">
+
+<children>
+
+        <VBox spacing="18"
+              layoutX="20"
+              layoutY="20"
+              prefWidth="360">
+
+            <!-- Tombol Kembali -->
+            <Button text="Kembali"
+                    onAction="#handleBack"
+                    style="-fx-background-color: #10266F;
+                           -fx-text-fill: #ffffffff;
+                           -fx-padding: 6 18;
+                           -fx-background-radius: 20;" />
+
+                              <!-- Judul Halaman -->
+                            <VBox alignment="CENTER">
+                     <Label text="Detail Transfer"
+                            style="-fx-font-size: 28px;
+                                   -fx-font-weight: bold;
+                                   -fx-text-fill: #0B2A72;"/>
+                     </VBox>
+
+                     <TextField fx:id="tfNama" promptText="Nama Penerima"
+                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
+                       prefWidth="300"/>
+
+               <ComboBox fx:id="cbBank"
+              promptText="Tujuan Pembayaran"
+              style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
+                       prefWidth="200"/>
+
+               <TextField fx:id="tfNoRek"
+               promptText="No Rekening / ID"
+               style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
+                       prefWidth="300"/>
+
+               <TextField fx:id="tfNominal"
+               promptText="Nominal"
+               style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
+                       prefWidth="300"/>
+
+              <Label fx:id="lblAdmin"/>
+              <Label fx:id="lblTotal"/>
+
+              <HBox alignment="CENTER">
+              <Button text="Bayar"
+                     prefWidth="150"
+                     prefHeight="45"
+                     onAction="#handleBayar" 
+                     style="-fx-background-color: #10266F;
+                            -fx-text-fill: #ffffffff;
+                            -fx-font-size: 16;
+                            -fx-font-weight: bold;
+                            -fx-background-radius: 15;" />
+              </HBox>
+
+         </VBox>
+
+    </children>
+
+</AnchorPane>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox xmlns="http://javafx.com/javafx/13"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.app.Transfer.BuktiTransaksiController"
+      alignment="CENTER"
+      spacing="25"
+      prefHeight="500"
+      style="-fx-background-color: #10266F;
+             -fx-padding: 30;">
+
+    <!-- Icon sukses -->
+    <StackPane>
+        <Circle radius="38" fill="#3DDC97"/>
+        <Label text="✓"
+               style="-fx-font-size: 38px;
+                      -fx-text-fill: white;
+                      -fx-font-weight: bold;"/>
+    </StackPane>
+
+    <!-- Judul -->
+    <Label text="Transaksi Berhasil"
+           style="-fx-font-size: 22px;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: white;"/>
+
+    <!-- Card Bukti -->
+    <VBox alignment="CENTER"
+          spacing="15"
+          prefWidth="320"
+          style="-fx-background-color: #EAF6FF;
+                 -fx-background-radius: 25;
+                 -fx-padding: 25;">
+
+        <Label fx:id="lblBukti"
+               wrapText="true"
+               textAlignment="LEFT"
+               style="-fx-font-size: 15px;
+                      -fx-text-fill: #10266F;
+                      -fx-font-weight: bold;" />
+    </VBox>
+
+    <!-- Tombol -->
+    <Button text="Kembali"
+            onAction="#handleKembali"
+            prefWidth="200"
+            prefHeight="50"
+            style="-fx-background-color: #B9FFF2;
+                   -fx-text-fill: #10266F;
+                   -fx-font-size: 14px;
+                   -fx-font-weight: bold;
+                   -fx-background-radius: 30;" />
+
+</VBox>
