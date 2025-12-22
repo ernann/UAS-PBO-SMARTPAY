@@ -97,6 +97,20 @@ public class PembayaranData {
 
         return "";
     }
+    
+    public static boolean isValidSmartPayRekening(String noRek) {
+        if (noRek == null) return false;
+        
+        if (!noRek.matches("006\\d{7}")) {
+            return false;
+        }
+        
+        if (noRek.length() != 10) {
+            return false;
+        }
+        
+        return com.app.UserDatabase.isRekeningExists(noRek);
+    }
 
     public static void clear() {
         nama = bank = noRek = null;

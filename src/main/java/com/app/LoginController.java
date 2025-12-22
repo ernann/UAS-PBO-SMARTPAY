@@ -1,54 +1,74 @@
+// [file name]: LoginController.java
 package com.app;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class LoginController extends BaseController {
-
+public class LoginController {
+    
     @FXML private TextField txtEmail;
     @FXML private PasswordField txtPassword;
-
+    
     @FXML
-    private void handleLogin(ActionEvent event) {
-        String email = txtEmail.getText().trim();
-        String password = txtPassword.getText().trim();
-
-        if (email.isEmpty() || password.isEmpty()) {
-            showAlert(javafx.scene.control.Alert.AlertType.WARNING, "Peringatan", "Email dan Password tidak boleh kosong!");
+    private void handleLogin() {
+        String username = txtEmail.getText().trim();
+        String password = txtPassword.getText();
+        
+        System.out.println("\n=== PROSES LOGIN ===");
+        System.out.println("Username: " + username);
+        
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert("Login Gagal", "Username dan password wajib diisi!");
             return;
         }
-
-        User user = SharedData.getRegisteredUser();
-        if (user == null || !email.equals(user.getEmail()) || !password.equals(user.getPassword())) {
-            showAlert(javafx.scene.control.Alert.AlertType.ERROR, "Login Gagal", "Email atau password salah!");
-            return;
-        }
-
-        // Login sukses → masuk Home
-        try {
+        
+        User user = UserDatabase.authenticate(username, password);
+        
+        if (user != null) {
+            // Set UserData dengan data user yang login
+            UserData.setNama(user.getNama());
+            UserData.setSmartId(user.getSmartId());
+            UserData.setEmail(user.getEmail());
+            UserData.setNomorRekening(user.getNomorRekening());
+            UserData.setSaldo(user.getSaldo());
+            UserData.setPin(user.getPin());
+            
+            System.out.println("✅ Login BERHASIL!");
+            System.out.println("   Nama: " + UserData.getNama());
+            System.out.println("   Smart ID: " + UserData.getSmartId());
+            System.out.println("   Rekening: " + UserData.getNomorRekening());
+            System.out.println("   Saldo: " + UserData.getSaldoFormatted());
+            
+            // Tampilkan semua user dan rekening untuk debugging
+            UserDatabase.printAllUsers();
+            UserDatabase.printAllRekening();
+            
+            // Navigate ke Home
             App.setRoot("Home");
-        } catch (Exception e) {
-            e.printStackTrace();
+            
+        } else {
+            showAlert("Login Gagal", "Username atau password salah!");
+            System.out.println("❌ Login GAGAL: Username/password salah");
         }
     }
-
+    
     @FXML
-    private void handleRegister(ActionEvent event) {
-        try {
-            App.setRoot("Register");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void handleForgotPassword() {
+        showAlert("Lupa Password", "Fitur ini belum tersedia. Hubungi admin.");
     }
-
+    
     @FXML
-    private void handleForgotPassword(ActionEvent event) {
-        try {
-            App.setRoot("Verif");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void handleRegister() {
+        App.setRoot("Register");
+    }
+    
+    private void showAlert(String title, String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.show();
     }
 }

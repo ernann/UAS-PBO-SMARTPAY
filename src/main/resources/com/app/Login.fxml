@@ -3,38 +3,85 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/20"
+<AnchorPane prefHeight="600.0" prefWidth="400.0"
+            xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.app.LoginController"
-            style="-fx-background-color: #D6ECFA;">
-
-    <center>
-        <VBox spacing="15" alignment="CENTER">
-            <padding><Insets top="30" bottom="30" left="40" right="40"/></padding>
-
-            <Label text="SmartPay Login"
-                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #002B6B;"/>
-
-            <TextField fx:id="txtEmail" promptText="Email"
-                       style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
-                       prefWidth="300"/>
-
+            style="-fx-background-color: #165497ff;">
+    
+    <VBox alignment="CENTER" spacing="5.0" 
+          AnchorPane.topAnchor="30.0" AnchorPane.bottomAnchor="30.0" 
+          AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+        
+        <!-- Logo/Header -->
+        <Label text="SmartPay" 
+               style="-fx-text-fill: #cae3ffff; -fx-font-size: 36px; -fx-font-weight: bold;">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+        
+        <!-- Form Login -->
+        <VBox spacing="15.0" alignment="CENTER" style="-fx-background-color: #ddedffff; -fx-background-radius: 20; -fx-padding: 30;">
+            
+            <Label text="Login" 
+                   style="-fx-text-fill: #1f5bb4ff; -fx-font-size: 24px; -fx-font-weight: bold;">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+            
+            <TextField fx:id="txtEmail" promptText="Email atau Smart ID"
+                       style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #0d47a1; -fx-padding: 12 15; -fx-font-size: 14px;"
+                       prefWidth="280.0" />
+            
             <PasswordField fx:id="txtPassword" promptText="Password"
-                           style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #002B6B; -fx-padding: 10 12;"
-                           prefWidth="300"/>
-
-            <Hyperlink text="Forgot Password?" onAction="#handleForgotPassword"
-                       style="-fx-text-fill: #003B94; -fx-font-size: 13px; -fx-padding: 0;" />
-
+                           style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #0d47a1; -fx-padding: 12 15; -fx-font-size: 14px;"
+                           prefWidth="280.0" />
+            
+            <Hyperlink text="Lupa Password?" onAction="#handleForgotPassword"
+                       style="-fx-text-fill: #2059adff; -fx-font-size: 12px; -fx-padding: 5 0;" />
+            
+            <!-- Tombol Login -->
             <Button text="Login" onAction="#handleLogin"
-                    style="-fx-background-color: #003B94; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 12;"
-                    prefWidth="300" prefHeight="40"/>
-
+                    style="-fx-background-color: #275daeff; -fx-text-fill: #cae3ffff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 10;"
+                    prefWidth="280.0" prefHeight="45.0">
+                <padding>
+                    <Insets top="10.0" bottom="10.0" left="20.0" right="20.0" />
+                </padding>
+            </Button>
+            
+            <!-- Separator -->
+            <Separator prefWidth="200.0">
+                <VBox.margin>
+                    <Insets top="10.0" bottom="10.0" />
+                </VBox.margin>
+            </Separator>
+            
+            <!-- Tombol Register -->
+            <Label text="Belum punya akun?" 
+                   style="-fx-text-fill: #666; -fx-font-size: 14px;" />
+            
             <Button text="Register" onAction="#handleRegister"
-                    style="-fx-background-color: transparent; -fx-border-color: #003B94; -fx-text-fill: #003B94; -fx-font-size: 16px; -fx-background-radius: 12; -fx-border-radius: 12;"
-                    prefWidth="300" prefHeight="40"/>
+                    style="-fx-background-color: #275da8ff; -fx-border-color: #275da8ff; -fx-text-fill: #d8e8ffff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-border-radius: 10;"
+                    prefWidth="280.0" prefHeight="45.0">
+                <padding>
+                    <Insets top="10.0" bottom="10.0" left="20.0" right="20.0" />
+                </padding>
+            </Button>
+            
         </VBox>
-    </center>
-
-</BorderPane>
+        
+        <!-- Footer -->
+        <Label text="© 2024 SmartPay. All rights reserved." 
+               style="-fx-text-fill: #d7e7ffff; -fx-font-size: 12px; -fx-opacity: 0.8;">
+            <VBox.margin>
+                <Insets top="30.0" />
+            </VBox.margin>
+        </Label>
+        
+    </VBox>
+    
+</AnchorPane>

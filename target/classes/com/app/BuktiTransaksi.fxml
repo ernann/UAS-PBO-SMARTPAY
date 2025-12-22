@@ -1,59 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/13"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.app.Transfer.BuktiTransaksiController"
       alignment="CENTER"
       spacing="25"
-      prefHeight="500"
-      style="-fx-background-color: #10266F;
-             -fx-padding: 30;">
-
-    <!-- Icon sukses -->
-    <StackPane>
-        <Circle radius="38" fill="#3DDC97"/>
-        <Label text="✓"
-               style="-fx-font-size: 38px;
-                      -fx-text-fill: white;
-                      -fx-font-weight: bold;"/>
-    </StackPane>
-
-    <!-- Judul -->
-    <Label text="Transaksi Berhasil"
-           style="-fx-font-size: 22px;
-                  -fx-font-weight: bold;
-                  -fx-text-fill: white;"/>
-
-    <!-- Card Bukti -->
-    <VBox alignment="CENTER"
-          spacing="15"
-          prefWidth="320"
-          style="-fx-background-color: #EAF6FF;
-                 -fx-background-radius: 25;
-                 -fx-padding: 25;">
-
-        <Label fx:id="lblBukti"
-               wrapText="true"
-               textAlignment="LEFT"
-               style="-fx-font-size: 15px;
-                      -fx-text-fill: #10266F;
-                      -fx-font-weight: bold;" />
+      prefHeight="600"
+      style="-fx-background-color: #165497ff;
+             -fx-padding: 20;">
+    
+    <!-- Header dengan Icon -->
+    <VBox alignment="CENTER" spacing="15">
+        <!-- Icon Check -->
+        <StackPane>
+            <Circle radius="40" fill="#7be5f8ff" stroke="#ffffffff" strokeWidth="3"/>
+            <Label text="✓"
+                   style="-fx-font-size: 36px;
+                          -fx-text-fill: #165497ff;
+                          -fx-font-weight: bold;"/>
+        </StackPane>
+        
+        <!-- Judul -->
+        <VBox alignment="CENTER" spacing="5">
+            <Label text="Transaksi Berhasil!"
+                   style="-fx-font-size: 24px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: white;" />
+            <Label text="Pembayaran telah berhasil diproses"
+                   style="-fx-font-size: 13px;
+                          -fx-text-fill: #cae3ffff;" />
+        </VBox>
     </VBox>
 
-    <!-- Tombol -->
-    <Button text="Kembali"
-            onAction="#handleKembali"
-            prefWidth="200"
-            prefHeight="50"
-            style="-fx-background-color: #B9FFF2;
-                   -fx-text-fill: #10266F;
-                   -fx-font-size: 14px;
-                   -fx-font-weight: bold;
-                   -fx-background-radius: 30;" />
+    <!-- Card Bukti Transaksi -->
+    <VBox alignment="CENTER" spacing="0"
+          prefWidth="320"
+          style="-fx-background-color: #cae3ffff;
+                 -fx-background-radius: 15;
+                 -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 3);
+                 -fx-padding: 20;">
+        
+        <!-- Header Card -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 0 0 15 0;">
+            <Label text="BUKTI TRANSAKSI"
+                   style="-fx-font-size: 16px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #1f5bb4ff;" />
+            <Separator prefWidth="250" style="-fx-background-color: #4c4c4cff;" />
+        </VBox>
+        
+        <!-- Detail Transaksi -->
+        <VBox spacing="12" prefWidth="280">
+            
+            <!-- Baris 1: Nama Penerima -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Nama Penerima"
+                       style="-fx-text-fill: #666666;
+                              -fx-font-size: 13px;
+                              -fx-min-width: 120;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblNama"
+                       text="-"
+                       style="-fx-text-fill: #333333;
+                              -fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-alignment: CENTER_RIGHT;" />
+            </HBox>
+            
+            <!-- Baris 2: Bank Tujuan -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Bank Tujuan"
+                       style="-fx-text-fill: #666666;
+                              -fx-font-size: 13px;
+                              -fx-min-width: 120;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblBank"
+                       text="-"
+                       style="-fx-text-fill: #333333;
+                              -fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-alignment: CENTER_RIGHT;" />
+            </HBox>
+            
+            <!-- Baris 3: No. Rekening -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="No. Rekening"
+                       style="-fx-text-fill: #666666;
+                              -fx-font-size: 13px;
+                              -fx-min-width: 120;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblRekening"
+                       text="-"
+                       style="-fx-text-fill: #333333;
+                              -fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-alignment: CENTER_RIGHT;" />
+            </HBox>
+            
+            <!-- Baris 4: Nominal -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Nominal Transfer"
+                       style="-fx-text-fill: #666666;
+                              -fx-font-size: 13px;
+                              -fx-min-width: 120;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblNominal"
+                       text="Rp 0"
+                       style="-fx-text-fill: #333333;
+                              -fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-alignment: CENTER_RIGHT;" />
+            </HBox>
+            
+            <!-- Baris 5: Biaya Admin -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Biaya Admin"
+                       style="-fx-text-fill: #666666;
+                              -fx-font-size: 13px;
+                              -fx-min-width: 120;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblAdmin"
+                       text="Rp 0"
+                       style="-fx-text-fill: #333333;
+                              -fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-alignment: CENTER_RIGHT;" />
+            </HBox>
+            
+            <!-- Separator -->
+            <Separator prefWidth="250" style="-fx-background-color: #4c4c4cff;" />
+            
+            <!-- Baris 6: Total Bayar -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="TOTAL BAYAR"
+                       style="-fx-text-fill: #1f5bb4ff;
+                              -fx-font-weight: bold;
+                              -fx-font-size: 14px;
+                              -fx-min-width: 120;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblTotal"
+                       text="Rp 0"
+                       style="-fx-text-fill: #1f5bb4ff;
+                              -fx-font-weight: bold;
+                              -fx-font-size: 16px;
+                              -fx-alignment: CENTER_RIGHT;" />
+            </HBox>
+            
+        </VBox>
+        
+        <!-- Footer Card: Timestamp -->
+        <VBox alignment="CENTER" style="-fx-padding: 15 0 0 0;">
+            <Separator prefWidth="250" style="-fx-background-color: #4c4c4cff;" />
+            <Label fx:id="lblTimestamp" 
+                   style="-fx-text-fill: #999999;
+                          -fx-font-size: 11px;
+                          -fx-padding: 10 0 0 0;" />
+        </VBox>
+        
+    </VBox>
+
+    <!-- Tombol Aksi -->
+    <VBox alignment="CENTER" spacing="8" style="-fx-padding: 15 0 0 0;">
+        <Button text="KEMBALI KE BERANDA"
+                onAction="#handleKembali"
+                prefWidth="280"
+                prefHeight="42"
+                style="-fx-background-color: #c6e3ffff;
+                       -fx-text-fill: #1f5bb4ff;
+                       -fx-font-size: 14px;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 18;
+                       -fx-border-color: #1f5bb4ff;
+                       -fx-border-width: 1.5;
+                       -fx-border-radius: 10;
+                       -fx-cursor: hand;" />
+    </VBox>
 
 </VBox>
