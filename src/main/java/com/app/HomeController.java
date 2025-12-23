@@ -1,4 +1,3 @@
-// [file name]: HomeController.java
 package com.app;
 
 import java.time.LocalDate;
@@ -28,7 +27,7 @@ public class HomeController {
         // Load user data
         labelNama.setText("Hello, " + UserData.getNama());
         labelRekening.setText(UserData.getNomorRekening());
-        labelSaldo.setText(UserData.getSaldoFormatted());
+        labelSaldo.setText(SaldoManager.formatSaldo());
         
         // Set tooltip for logout button
         Tooltip logoutTooltip = new Tooltip("Logout");
@@ -155,8 +154,7 @@ public class HomeController {
     @FXML
     private void handleTopUp() {
         System.out.println("Tombol Top Up diklik");
-        // Implementasi top up
-        App.setRoot("TopUp"); // Jika ada halaman TopUp
+        App.setRoot("TopUp"); 
     }
     
     @FXML
@@ -174,8 +172,6 @@ public class HomeController {
     @FXML
     private void handleRiwayat() {
         System.out.println("Tombol Riwayat diklik");
-        // Bisa mengarahkan ke halaman riwayat transaksi khusus
-        // Atau langsung ke tab riwayat di Reminder
         App.setRoot("Reminder");
     }
     
@@ -191,4 +187,19 @@ public class HomeController {
     public void resetReminderFlag() {
         this.hasShownReminder = false;
     }
+
+    @FXML
+private javafx.scene.layout.AnchorPane rootPane; // 🔹 di FXML harus ada fx:id="rootPane"
+
+public javafx.scene.layout.AnchorPane getRootNode() {
+    return rootPane;
+}
+
+   // ===================== TAMBAHAN UNTUK UPDATE SALDO HOME =====================
+   // HANYA METHOD INI YANG DITAMBAHKAN / DIREVISI
+   public void updateSaldoHome() {
+       labelSaldo.setText(SaldoManager.formatSaldo());
+       System.out.println("🔄 Saldo di Home di-update: " + SaldoManager.formatSaldo());
+   }
+
 }

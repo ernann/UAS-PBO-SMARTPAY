@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.app.AlfaTopupController"
+            prefWidth="400" prefHeight="650"
+            style="-fx-background-color: #165497ff;">
+
+    <VBox spacing="20" alignment="TOP_CENTER"
+          AnchorPane.topAnchor="20"
+          AnchorPane.leftAnchor="20"
+          AnchorPane.rightAnchor="20">
+
+        <Label text="Top Up Alfamart"
+               style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" />
+
+        <Label fx:id="lblSaldo"
+               text="Saldo Saat Ini: Rp0"
+               style="-fx-text-fill: #E0E0E0; -fx-font-size: 14;" />
+
+        <TextField fx:id="txtNominal"
+                   promptText="Masukkan nominal"
+                   prefWidth="260"
+                   style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #b8d4f5; -fx-border-width: 1.5; -fx-background-color: white; -fx-padding: 8 12; -fx-font-size: 14;" />
+
+        <GridPane hgap="10" vgap="10">
+            <Button text="Rp10.000" prefWidth="120" onAction="#handleNominalQuick"/>
+            <Button text="Rp20.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.columnIndex="1"/>
+            <Button text="Rp50.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.rowIndex="1"/>
+            <Button text="Rp100.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Button text="Rp150.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.rowIndex="2"/>
+            <Button text="Rp200.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        </GridPane>
+
+        <Button fx:id="btnNext" text="Next" prefWidth="260" onAction="#handleNext"
+                style="-fx-background-color: linear-gradient(to right, #1f5bb4ff, #2d6bc5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 12; -fx-padding: 10 0;"/>
+
+        <Button text="← Kembali" prefWidth="260" onAction="#handleBack"
+                style="-fx-background-color: rgba(193, 218, 255, 0.85); -fx-text-fill: #0d47a1; -fx-font-weight: bold; -fx-background-radius: 12; -fx-padding: 8 0;"/>
+    </VBox>
+</AnchorPane>

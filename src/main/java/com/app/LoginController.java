@@ -34,6 +34,9 @@ public class LoginController {
             UserData.setNomorRekening(user.getNomorRekening());
             UserData.setSaldo(user.getSaldo());
             UserData.setPin(user.getPin());
+
+            // Sinkronkan SaldoManager dengan saldo user
+            SaldoManager.setSaldo(user.getSaldo());
             
             System.out.println("✅ Login BERHASIL!");
             System.out.println("   Nama: " + UserData.getNama());

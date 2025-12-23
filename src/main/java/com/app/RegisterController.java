@@ -239,7 +239,7 @@ public class RegisterController {
             UserData.setPin(pin);
             UserData.setSaldo(newUser.getSaldo()); // Saldo 0
             
-            com.app.Transfer.SaldoManager.setSaldo(newUser.getSaldo()); // Saldo 0
+            com.app.SaldoManager.setSaldo(newUser.getSaldo()); // Saldo 0
             
             System.out.println("✓ User berhasil dibuat");
             System.out.println("  Nomor Rekening: " + newUser.getNomorRekening());

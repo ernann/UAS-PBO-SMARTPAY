@@ -1,4 +1,4 @@
-package com.app.controller; // Pindah ke package com.app.controller
+package com.app;
 
 import java.util.Optional;
 
@@ -13,9 +13,8 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import com.app.App;
 
-public class RegisterController {
+public class RiwayatController{
 
     @FXML private TextField txtNama;
     @FXML private TextField txtSmartId;
@@ -240,7 +239,7 @@ public class RegisterController {
             UserData.setPin(pin);
             UserData.setSaldo(newUser.getSaldo()); // Saldo 0
             
-            com.app.Transfer.SaldoManager.setSaldo(newUser.getSaldo()); // Saldo 0
+            com.app.SaldoManager.setSaldo(newUser.getSaldo()); // Saldo 0
             
             System.out.println("✓ User berhasil dibuat");
             System.out.println("  Nomor Rekening: " + newUser.getNomorRekening());
