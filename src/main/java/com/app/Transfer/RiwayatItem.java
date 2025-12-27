@@ -1,6 +1,9 @@
 package com.app.Transfer;
 
-public class RiwayatItem {
+import java.io.Serializable;
+
+public class RiwayatItem implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String nama;
     private String bank;
@@ -12,18 +15,9 @@ public class RiwayatItem {
         this.noRek = noRek;
     }
 
-    // ✅ GETTER (INI YANG KURANG)
-    public String getNama() {
-        return nama;
-    }
-
-    public String getBank() {
-        return bank;
-    }
-
-    public String getNoRek() {
-        return noRek;
-    }
+    public String getNama() { return nama; }
+    public String getBank() { return bank; }
+    public String getNoRek() { return noRek; }
 
     @Override
     public String toString() {

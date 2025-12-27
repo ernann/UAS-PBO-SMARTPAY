@@ -46,12 +46,13 @@ public class FormPembayaranController {
             System.out.println("Nama di-set: " + PembayaranData.getNama());
         }
         
-        if (PembayaranData.getBank() != null && !PembayaranData.getBank().isEmpty()) {
+        if (PembayaranData.getBank() != null) {
             cbBank.setValue(PembayaranData.getBank());
-            lblAdmin.setText("Rp " + String.format("%,d", PembayaranData.getAdmin()));
-            System.out.println("Bank di-set: " + PembayaranData.getBank());
+
+            int admin = PembayaranData.getAdmin();
+            lblAdmin.setText("Rp " + String.format("%,d", admin));
         }
-        
+
         if (PembayaranData.getNoRek() != null && !PembayaranData.getNoRek().isEmpty()) {
             tfNoRek.setText(PembayaranData.getNoRek());
             System.out.println("NoRek di-set: " + PembayaranData.getNoRek());
@@ -72,7 +73,6 @@ public class FormPembayaranController {
             updateTotal();
         });
         
-        lblAdmin.setText("Rp 0");
         lblTotal.setText("Rp 0");
         
         System.out.println("=== INITIALIZE SELESAI ===");

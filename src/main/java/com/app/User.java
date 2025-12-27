@@ -22,7 +22,7 @@ public class User implements Serializable {
         this.password = password;
         this.nama = nama;
         this.nomorRekening = generateNomorRekening();
-        this.saldo = 0; // SALDO AWAL DARI 0
+        this.saldo = 0; 
         this.pin = "123456";
     }
     

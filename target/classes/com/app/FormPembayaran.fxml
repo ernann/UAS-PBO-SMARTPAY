@@ -7,56 +7,53 @@
 <AnchorPane xmlns="http://javafx.com/javafx/13"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.app.Transfer.FormPembayaranController"
-            prefWidth="400"
+            prefWidth="500"
             prefHeight="700"
             style="-fx-background-color: #165497ff;">
 
     <children>
-        <VBox spacing="0" prefWidth="400" prefHeight="700">
+        <!-- Parent VBox -->
+        <VBox spacing="0" prefWidth="400">
             
-            <!-- Header dengan Tombol Kembali - SANGAT KOMPAK -->
-            <HBox alignment="CENTER_LEFT" 
-                  style="-fx-padding: 15 20 5 20;"
-                  prefHeight="40">
-                <Button text="Kembali"
-                        onAction="#handleBack"
-                        style="-fx-background-color: rgba(193, 218, 255, 1); 
-                               -fx-text-fill: #224098ff;
-                               -fx-font-size: 13px;
-                               -fx-background-radius: 12;
-                               -fx-padding: 6 12;
-                               -fx-cursor: hand;"
-                        prefWidth="75" />
+            <!-- Tombol Kembali -->
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20;">
+                <Button onAction="#handleBack"
+                        prefWidth="100"
+                        style="-fx-background-color: #D4EBF8;
+                               -fx-background-radius: 20;
+                               -fx-cursor: hand;
+                               -fx-padding: 6 10 6 10;">
+                    <graphic>
+                        <Label text="Kembali"
+                               style="-fx-text-fill: #1f5bb4ff;
+                                      -fx-font-size: 14px;
+                                      -fx-font-weight: bold;"/>
+                    </graphic>
+                </Button>
             </HBox>
-
-            <!-- Container Form Putih -->
-            <VBox VBox.vgrow="ALWAYS"
-                  alignment="TOP_CENTER" 
-                  spacing="0"
+     <!-- Judul -->
+                    <VBox alignment="CENTER" spacing="2" style="-fx-padding: 0 0 10 0;">
+                        <Label text="Detail Transfer"
+                               style="-fx-font-size: 30px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: #ffffffff;" />
+                        <Label text="Isi data penerima dengan benar"
+                               style="-fx-font-size: 15px;
+                                      -fx-text-fill: #e7f1ffff;" />
+                    </VBox>
+            <!-- Container Form -->
+            <VBox alignment="TOP_CENTER"
+                  spacing="10"
                   style="-fx-background-color: #cae3ffff; 
                          -fx-background-radius: 30 30 0 0;"
-                  prefWidth="400">
-                
-                <!-- Container dalam - SANGAT KOMPAK -->
-                <VBox alignment="TOP_CENTER" spacing="8"
-                      style="-fx-padding: 15 20 15 20;"
-                      VBox.vgrow="ALWAYS">
-                    
-                    <!-- Judul Header - KOMPAK -->
-                    <VBox alignment="CENTER" spacing="3" style="-fx-padding: 0 0 10 0;">
-                        <Label text="Detail Transfer"
-                               style="-fx-font-size: 22px;
-                                      -fx-font-weight: bold;
-                                      -fx-text-fill: #1f5bb4ff;" />
-                        <Label text="Isi data penerima dengan benar"
-                               style="-fx-font-size: 13px;
-                                      -fx-text-fill: #1f5bb4ff;
-                                      -fx-opacity: 0.9;" />
-                    </VBox>
+                  prefWidth="400"
+                  prefHeight="600">
 
-                    <!-- Container Form Input - KOMPAK TAPI READABLE -->
+                <VBox alignment="TOP_CENTER" spacing="8" style="-fx-padding: 15 20 15 20;">
+
+                    <!-- Form Input -->
                     <VBox spacing="10" prefWidth="360" alignment="TOP_CENTER">
-                        
+
                         <!-- Nama Penerima -->
                         <VBox spacing="4" prefWidth="360">
                             <Label text="Nama Penerima"
@@ -64,16 +61,15 @@
                                           -fx-font-size: 13px;
                                           -fx-font-weight: bold;" />
                             <TextField fx:id="tfNama"
-                                     promptText="Masukkan nama lengkap penerima"
-                                     style="-fx-background-radius: 8;
-                                            -fx-border-radius: 8;
-                                            -fx-border-color: #a0c4ffff;
-                                            -fx-border-width: 1.5;
-                                            -fx-background-color: white;
-                                            -fx-padding: 10 12;
-                                            -fx-font-size: 13px;
-                                            -fx-pref-height: 38;"
-                                     prefWidth="360" />
+                                       promptText="Masukkan nama lengkap penerima"
+                                       style="-fx-background-radius: 8;
+                                              -fx-border-radius: 8;
+                                              -fx-border-color: #a0c4ffff;
+                                              -fx-border-width: 1.5;
+                                              -fx-background-color: white;
+                                              -fx-padding: 10 12;
+                                              -fx-font-size: 13px;
+                                              -fx-pref-height: 38;" />
                         </VBox>
 
                         <!-- Tujuan Bank -->
@@ -83,16 +79,15 @@
                                           -fx-font-size: 13px;
                                           -fx-font-weight: bold;" />
                             <ComboBox fx:id="cbBank"
-                                    promptText="Pilih bank tujuan"
-                                    style="-fx-background-radius: 8;
-                                           -fx-border-radius: 8;
-                                           -fx-border-color: #a0c4ffff;
-                                           -fx-border-width: 1.5;
-                                           -fx-background-color: white;
-                                           -fx-padding: 0 10;
-                                           -fx-font-size: 13px;
-                                           -fx-pref-height: 38;"
-                                    prefWidth="360" />
+                                      promptText="Pilih bank tujuan"
+                                      style="-fx-background-radius: 8;
+                                             -fx-border-radius: 8;
+                                             -fx-border-color: #a0c4ffff;
+                                             -fx-border-width: 1.5;
+                                             -fx-background-color: white;
+                                             -fx-padding: 0 10;
+                                             -fx-font-size: 13px;
+                                             -fx-pref-height: 38;" />
                         </VBox>
 
                         <!-- Nomor Rekening -->
@@ -102,16 +97,15 @@
                                           -fx-font-size: 13px;
                                           -fx-font-weight: bold;" />
                             <TextField fx:id="tfNoRek"
-                                     promptText="Masukkan nomor rekening"
-                                     style="-fx-background-radius: 8;
-                                            -fx-border-radius: 8;
-                                            -fx-border-color: #a0c4ffff;
-                                            -fx-border-width: 1.5;
-                                            -fx-background-color: white;
-                                            -fx-padding: 10 12;
-                                            -fx-font-size: 13px;
-                                            -fx-pref-height: 38;"
-                                     prefWidth="360" />
+                                       promptText="Masukkan nomor rekening"
+                                       style="-fx-background-radius: 8;
+                                              -fx-border-radius: 8;
+                                              -fx-border-color: #a0c4ffff;
+                                              -fx-border-width: 1.5;
+                                              -fx-background-color: white;
+                                              -fx-padding: 10 12;
+                                              -fx-font-size: 13px;
+                                              -fx-pref-height: 38;" />
                         </VBox>
 
                         <!-- Nominal Transfer -->
@@ -121,66 +115,39 @@
                                           -fx-font-size: 13px;
                                           -fx-font-weight: bold;" />
                             <TextField fx:id="tfNominal"
-                                     promptText="Masukkan nominal transfer"
-                                     style="-fx-background-radius: 8;
-                                            -fx-border-radius: 8;
-                                            -fx-border-color: #a0c4ffff;
-                                            -fx-border-width: 1.5;
-                                            -fx-background-color: white;
-                                            -fx-padding: 10 12;
-                                            -fx-font-size: 13px;
-                                            -fx-pref-height: 38;"
-                                     prefWidth="360" />
+                                       promptText="Masukkan nominal transfer"
+                                       style="-fx-background-radius: 8;
+                                              -fx-border-radius: 8;
+                                              -fx-border-color: #a0c4ffff;
+                                              -fx-border-width: 1.5;
+                                              -fx-background-color: white;
+                                              -fx-padding: 10 12;
+                                              -fx-font-size: 13px;
+                                              -fx-pref-height: 38;" />
                             <Label text="Minimum Rp 20.000, maksimum Rp 25.000.000"
                                    style="-fx-text-fill: #666;
                                           -fx-font-size: 11px;
                                           -fx-padding: 3 0 0 5;" />
                         </VBox>
 
-                        <!-- Info Biaya - SANGAT KOMPAK -->
-                        <VBox spacing="6" 
-                              style="-fx-background-color: #e8f2ff;
-                                     -fx-background-radius: 12;
-                                     -fx-padding: 12;"
-                              prefWidth="360">
-                            
-                            <!-- Baris Biaya Admin -->
+                        <!-- Info Biaya -->
+                        <VBox spacing="6" style="-fx-background-color: #e8f2ff;
+                                                  -fx-background-radius: 12;
+                                                  -fx-padding: 12;" prefWidth="360">
                             <HBox alignment="CENTER_LEFT">
-                                <Label text="Biaya Admin"
-                                       style="-fx-text-fill: #1f5bb4ff;
-                                              -fx-font-size: 13px;"
-                                       HBox.hgrow="ALWAYS" />
-                                <Label fx:id="lblAdmin"
-                                       text="Rp 0"
-                                       style="-fx-text-fill: #1f5bb4ff;
-                                              -fx-font-weight: bold;
-                                              -fx-font-size: 13px;" />
+                                <Label text="Biaya Admin" style="-fx-text-fill: #1f5bb4ff; -fx-font-size: 13px;" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="lblAdmin" text="Rp 0" style="-fx-text-fill: #1f5bb4ff; -fx-font-weight: bold; -fx-font-size: 13px;" />
                             </HBox>
-                            
-                            <!-- Separator tipis -->
-                            <Separator style="-fx-background-color: #a0c4ffff; -fx-padding: 4 0;" />
-                            
-                            <!-- Baris Total Bayar -->
+                            <Separator style="-fx-background-color: #a0c4ffff; -fx-padding: 2 0;" />
                             <HBox alignment="CENTER_LEFT">
-                                <Label text="Total Bayar"
-                                       style="-fx-text-fill: #1f5bb4ff;
-                                              -fx-font-size: 15px;
-                                              -fx-font-weight: bold;"
-                                       HBox.hgrow="ALWAYS" />
-                                <Label fx:id="lblTotal"
-                                       text="Rp 0"
-                                       style="-fx-text-fill: #1f5bb4ff;
-                                              -fx-font-weight: bold;
-                                              -fx-font-size: 16px;" />
+                                <Label text="Total Bayar" style="-fx-text-fill: #1f5bb4ff; -fx-font-size: 15px; -fx-font-weight: bold;" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="lblTotal" text="Rp 0" style="-fx-text-fill: #1f5bb4ff; -fx-font-weight: bold; -fx-font-size: 16px;" />
                             </HBox>
                         </VBox>
 
                     </VBox>
 
-                    <!-- Spacer untuk mendorong tombol ke bawah -->
-                    <Region VBox.vgrow="ALWAYS" minHeight="2" />
-
-                    <!-- Tombol Lanjutkan Pembayaran - KOMPAK -->
+                    <!-- Tombol Lanjutkan -->
                     <Button text="LANJUTKAN PEMBAYARAN"
                             onAction="#handleBayar"
                             prefWidth="360"
@@ -191,16 +158,11 @@
                                    -fx-font-weight: bold;
                                    -fx-background-radius: 15;
                                    -fx-cursor: hand;
-                                   -fx-effect: dropshadow(gaussian, rgba(31, 91, 180, 0.3), 6, 0, 0, 2);">
-                        <VBox.margin>
-                            <Insets top="5" />
-                        </VBox.margin>
-                    </Button>
+                                   -fx-effect: dropshadow(gaussian, rgba(31, 91, 180, 0.3), 6, 0, 0, 2);" />
 
                 </VBox>
             </VBox>
 
         </VBox>
     </children>
-
 </AnchorPane>

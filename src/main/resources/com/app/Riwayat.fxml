@@ -10,7 +10,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17.0.2-ea" 
       xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="com.app.Riwayat.tugas.controller.MainController"
+      fx:controller="com.app.Riwayat.MainController"
       style="-fx-background-color: linear-gradient(to bottom, #a7c9ecff, #a7c9ecff); -fx-font-family: 'SF Pro Text', -apple-system, sans-serif;"
       spacing="0">
     

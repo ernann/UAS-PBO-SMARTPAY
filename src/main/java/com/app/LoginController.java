@@ -1,4 +1,3 @@
-// [file name]: LoginController.java
 package com.app;
 
 import javafx.fxml.FXML;
@@ -27,7 +26,6 @@ public class LoginController {
         User user = UserDatabase.authenticate(username, password);
         
         if (user != null) {
-            // Set UserData dengan data user yang login
             UserData.setNama(user.getNama());
             UserData.setSmartId(user.getSmartId());
             UserData.setEmail(user.getEmail());
@@ -35,7 +33,6 @@ public class LoginController {
             UserData.setSaldo(user.getSaldo());
             UserData.setPin(user.getPin());
 
-            // Sinkronkan SaldoManager dengan saldo user
             SaldoManager.setSaldo(user.getSaldo());
             
             System.out.println("✅ Login BERHASIL!");
@@ -44,11 +41,9 @@ public class LoginController {
             System.out.println("   Rekening: " + UserData.getNomorRekening());
             System.out.println("   Saldo: " + UserData.getSaldoFormatted());
             
-            // Tampilkan semua user dan rekening untuk debugging
             UserDatabase.printAllUsers();
             UserDatabase.printAllRekening();
             
-            // Navigate ke Home
             App.setRoot("Home");
             
         } else {

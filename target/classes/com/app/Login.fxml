@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0"
+<AnchorPane prefHeight="500" prefWidth="500"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.app.LoginController"
@@ -15,15 +15,9 @@
           AnchorPane.topAnchor="30.0" AnchorPane.bottomAnchor="30.0" 
           AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
         
-        <!-- Logo/Header -->
         <Label text="SmartPay" 
-               style="-fx-text-fill: #cae3ffff; -fx-font-size: 36px; -fx-font-weight: bold;">
-            <font>
-                <Font name="System Bold" size="36.0" />
-            </font>
-        </Label>
+               style="-fx-text-fill: #e0ecf3ff; -fx-font-size: 36px; -fx-font-weight: bold;"/>
         
-        <!-- Form Login -->
         <VBox spacing="15.0" alignment="CENTER" style="-fx-background-color: #ddedffff; -fx-background-radius: 20; -fx-padding: 30;">
             
             <Label text="Login" 
@@ -44,7 +38,6 @@
             <Hyperlink text="Lupa Password?" onAction="#handleForgotPassword"
                        style="-fx-text-fill: #2059adff; -fx-font-size: 12px; -fx-padding: 5 0;" />
             
-            <!-- Tombol Login -->
             <Button text="Login" onAction="#handleLogin"
                     style="-fx-background-color: #275daeff; -fx-text-fill: #cae3ffff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 10;"
                     prefWidth="280.0" prefHeight="45.0">
@@ -53,14 +46,12 @@
                 </padding>
             </Button>
             
-            <!-- Separator -->
             <Separator prefWidth="200.0">
                 <VBox.margin>
                     <Insets top="10.0" bottom="10.0" />
                 </VBox.margin>
             </Separator>
             
-            <!-- Tombol Register -->
             <Label text="Belum punya akun?" 
                    style="-fx-text-fill: #666; -fx-font-size: 14px;" />
             
@@ -74,14 +65,11 @@
             
         </VBox>
         
-        <!-- Footer -->
         <Label text="© 2024 SmartPay. All rights reserved." 
                style="-fx-text-fill: #d7e7ffff; -fx-font-size: 12px; -fx-opacity: 0.8;">
             <VBox.margin>
                 <Insets top="30.0" />
             </VBox.margin>
         </Label>
-        
     </VBox>
-    
 </AnchorPane>

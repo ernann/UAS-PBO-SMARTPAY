@@ -2,7 +2,6 @@ package com.app;
 
 import javafx.scene.control.Alert;
 
-// Superclass untuk controller lain
 public class BaseController {
 
     protected void showAlert(Alert.AlertType type, String title, String message) {
@@ -12,6 +11,4 @@ public class BaseController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    // Bisa ditambahkan method umum lain jika dibutuhkan
 }

@@ -117,7 +117,6 @@
                               -fx-alignment: CENTER_RIGHT;" />
             </HBox>
             
-            <!-- Baris 5: Biaya Admin -->
             <HBox alignment="CENTER_LEFT">
                 <Label text="Biaya Admin"
                        style="-fx-text-fill: #666666;
@@ -150,10 +149,8 @@
                               -fx-font-size: 16px;
                               -fx-alignment: CENTER_RIGHT;" />
             </HBox>
-            
         </VBox>
         
-        <!-- Footer Card: Timestamp -->
         <VBox alignment="CENTER" style="-fx-padding: 15 0 0 0;">
             <Separator prefWidth="250" style="-fx-background-color: #4c4c4cff;" />
             <Label fx:id="lblTimestamp" 
@@ -161,24 +158,22 @@
                           -fx-font-size: 11px;
                           -fx-padding: 10 0 0 0;" />
         </VBox>
-        
     </VBox>
 
-    <!-- Tombol Aksi -->
     <VBox alignment="CENTER" spacing="8" style="-fx-padding: 15 0 0 0;">
-        <Button text="KEMBALI KE BERANDA"
-                onAction="#handleKembali"
-                prefWidth="280"
-                prefHeight="42"
-                style="-fx-background-color: #c6e3ffff;
-                       -fx-text-fill: #1f5bb4ff;
-                       -fx-font-size: 14px;
-                       -fx-font-weight: bold;
-                       -fx-background-radius: 18;
-                       -fx-border-color: #1f5bb4ff;
-                       -fx-border-width: 1.5;
-                       -fx-border-radius: 10;
-                       -fx-cursor: hand;" />
-    </VBox>
+    <Button text="Kembali"
+            onAction="#handleKembali"
+            prefWidth="280"
+            prefHeight="42"
+            style="-fx-background-color: #c6e3ffff;
+                   -fx-font-size: 14px;
+                   -fx-text-fill: #1f5bb4ff;
+                   -fx-font-weight: bold;
+                   -fx-background-radius: 18;
+                   -fx-border-width: 1.5;
+                   -fx-border-radius: 10;
+                   -fx-cursor: hand;" />
+</VBox>
+
 
 </VBox>

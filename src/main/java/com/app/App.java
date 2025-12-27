@@ -12,7 +12,7 @@ public class App extends Application {
 
     private static Stage stage;
     private static Scene scene;
-    private static HomeController homeController; // 🔹 simpan instance HomeController
+    private static HomeController homeController; 
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -67,7 +67,6 @@ public class App extends Application {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
 
-            // Coba load file lain untuk testing
             if (!fxml.equals("Login")) {
                 System.out.println("🔄 Coba kembali ke Login...");
                 try {
@@ -83,7 +82,6 @@ public class App extends Application {
         }
     }
 
-    // ===================== HOME =====================
     public static void showHome() {
         if (homeController != null) {
             scene.setRoot(homeController.getRootNode());

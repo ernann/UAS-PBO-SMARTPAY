@@ -35,23 +35,18 @@ public class PembayaranController {
     public void initialize() {
         System.out.println("=== INITIALIZE PEMBAYARAN CONTROLLER ===");
         
-        // Cek apakah listRiwayat null
         if (listRiwayat == null) {
             System.out.println("ERROR: listRiwayat is NULL!");
         } else {
             System.out.println("listRiwayat is OK");
         }
         
-        // Debug: cek apakah ada data riwayat
         System.out.println("Jumlah riwayat di RiwayatPembayaran: " + RiwayatPembayaran.getList().size());
         
-        // Set data ke ListView
         listRiwayat.getItems().setAll(RiwayatPembayaran.getList());
         
-        // Debug: cek apakah ListView terisi
         System.out.println("Jumlah item di ListView: " + listRiwayat.getItems().size());
         
-        // Set event handler untuk klik item
         listRiwayat.setOnMouseClicked(e -> {
             System.out.println("ListView diklik - Click count: " + e.getClickCount());
             RiwayatItem item = listRiwayat.getSelectionModel().getSelectedItem();
@@ -59,7 +54,6 @@ public class PembayaranController {
             if (item != null) {
                 System.out.println("Item dipilih: " + item.getNama());
                 
-                // Simpan data ke PembayaranData
                 PembayaranData.setNama(item.getNama());
                 PembayaranData.setBank(item.getBank());
                 PembayaranData.setNoRek(item.getNoRek());
@@ -69,7 +63,6 @@ public class PembayaranController {
                 System.out.println("  Bank: " + PembayaranData.getBank());
                 System.out.println("  NoRek: " + PembayaranData.getNoRek());
                 
-                // Pindah ke form pembayaran
                 App.setRoot("FormPembayaran");
             } else {
                 System.out.println("Tidak ada item yang dipilih");

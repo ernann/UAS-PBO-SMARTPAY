@@ -4,8 +4,8 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.app.AlfaTopupController"
-            prefWidth="400" prefHeight="650"
+            fx:controller="com.app.AlfatopupController"
+            prefWidth="500" prefHeight="500"
             style="-fx-background-color: #165497ff;">
 
     <VBox spacing="20" alignment="TOP_CENTER"

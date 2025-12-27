@@ -1,12 +1,12 @@
 package com.app;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 // ================= ABSTRACT & METODE (TIDAK DIUBAH) =================
 abstract class MetodeTopup {
@@ -57,7 +57,7 @@ public class TopupController {
         // 🔁 REVISI FINAL: BACK KE HOME
         backButton.setOnAction(event -> {
             updateLog("Kembali ke Home");
-            App.setRoot("Home"); // ⬅️ WAJIB setRoot
+            App.setRoot("Home"); 
         });
     }
 
@@ -69,6 +69,11 @@ public class TopupController {
     }
 
     // ================= HANDLER METODE =================
+
+     @FXML
+    private void handleBack() {
+        App.setRoot("Home");
+    }
 
     @FXML
     private void handleBCAOneklik() {
