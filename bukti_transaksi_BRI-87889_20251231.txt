@@ -1,0 +1,20 @@
+================================
+        BUKTI TRANSAKSI        
+================================
+
+SMART PAY BANK
+
+No. Referensi : BRI-87889
+Tanggal       : 30/12/2025 11:19:47
+Jenis         : TOPUP
+Tipe          : PEMASUKAN
+Deskripsi     : TOP UP Bank BRI Direct Debit
+Jumlah        : + Rp50,000
+Customer      : eaea
+No. Rekening  : 0065232755
+Customer ID   : 1122
+
+================================
+Transaksi ini sah dan tercatat
+dalam sistem kami.
+================================

@@ -1,21 +1,21 @@
 package com.app;
 
 public class SaldoManager {
-    private static long saldo = 0;
+    static long saldo = 0;
 
-    // Ambil saldo saat ini
     public static long getSaldo() {
+        // Sinkron dengan UserData
+        saldo = UserData.getSaldo();
         return saldo;
     }
 
-    // Set saldo secara langsung
     public static void setSaldo(long newSaldo) {
         saldo = newSaldo;
-        System.out.println("✓ SaldoManager: Saldo diupdate menjadi " + formatSaldo(newSaldo));
+        UserData.setSaldo(newSaldo); // Sinkron dengan UserData
         updateDatabaseSaldo();
+        System.out.println("✓ SaldoManager: Saldo diupdate menjadi " + formatSaldo(newSaldo));
     }
 
-    // Kurangi saldo
     public static boolean kurangiSaldo(long jumlah) {
         if (jumlah <= 0 || jumlah > saldo) {
             System.out.println("✗ SaldoManager: Gagal mengurangi saldo. Jumlah: " +
@@ -24,6 +24,7 @@ public class SaldoManager {
         }
 
         saldo -= jumlah;
+        UserData.setSaldo(saldo); // Sinkron dengan UserData
         updateDatabaseSaldo();
 
         System.out.println("✓ SaldoManager: Saldo dikurangi " + formatSaldo(jumlah) +
@@ -31,10 +32,10 @@ public class SaldoManager {
         return true;
     }
 
-    // Tambah saldo
     public static void tambahSaldo(long jumlah) {
         if (jumlah > 0) {
             saldo += jumlah;
+            UserData.setSaldo(saldo); // Sinkron dengan UserData
             updateDatabaseSaldo();
 
             System.out.println("✓ SaldoManager: Saldo ditambah " + formatSaldo(jumlah) +
@@ -42,20 +43,18 @@ public class SaldoManager {
         }
     }
 
-    // Format saldo
     public static String formatSaldo() {
-        return "Rp" + String.format("%,d", saldo);
+        return formatSaldo(saldo);
     }
 
-    private static String formatSaldo(long amount) {
+    public static String formatSaldo(long amount) {
         return "Rp" + String.format("%,d", amount);
     }
 
-    // Update database sesuai UserData (AMAN)
     private static void updateDatabaseSaldo() {
         try {
             String rekening = UserData.getNomorRekening();
-            if (rekening == null) {
+            if (rekening == null || rekening.isEmpty()) {
                 System.out.println("⚠️ SaldoManager: User belum login, skip update DB");
                 return;
             }
@@ -66,12 +65,28 @@ public class SaldoManager {
                 UserDatabase.updateUser(currentUser);  
                 System.out.println("✓ SaldoManager: Database berhasil diupdate");
             } else {
-                System.err.println("✗ SaldoManager: User tidak ditemukan di database, skip update");
+                System.err.println("✗ SaldoManager: User tidak ditemukan di database");
             }
 
         } catch (Exception e) {
             System.err.println("❌ SaldoManager: Error saat update database");
             e.printStackTrace();
+        }
+    }
+    
+    public static void refreshFromDatabase() {
+        try {
+            String rekening = UserData.getNomorRekening();
+            if (rekening != null && !rekening.isEmpty()) {
+                User user = UserDatabase.getUserByRekening(rekening);
+                if (user != null) {
+                    saldo = user.getSaldo();
+                    UserData.setSaldo(saldo);
+                    System.out.println("✓ SaldoManager: Saldo direfresh dari database: " + formatSaldo(saldo));
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error refreshing saldo from database: " + e.getMessage());
         }
     }
 }

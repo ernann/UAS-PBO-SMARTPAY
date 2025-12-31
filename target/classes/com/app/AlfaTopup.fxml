@@ -5,39 +5,165 @@
 <AnchorPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.app.AlfatopupController"
-            prefWidth="500" prefHeight="500"
-            style="-fx-background-color: #165497ff;">
+            prefWidth="400" prefHeight="700"
+            style="-fx-background-color: #f5f9ff;">
 
-    <VBox spacing="20" alignment="TOP_CENTER"
-          AnchorPane.topAnchor="20"
-          AnchorPane.leftAnchor="20"
-          AnchorPane.rightAnchor="20">
+    <!-- Header -->
+    <VBox spacing="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        
+        <!-- Header Blue -->
+        <HBox style="-fx-background-color: #114b91ff; -fx-padding: 20px 15px;" 
+              alignment="CENTER_LEFT" spacing="12">
+            <Button text="←" 
+                    onAction="#handleBack"
+                    style="-fx-font-size: 18; -fx-background-color: rgba(154, 218, 255, 1); -fx-text-fill: #114585ff; -fx-background-radius: 15; -fx-min-width: 38; -fx-min-height: 38; -fx-cursor: hand;"/>
+            <VBox spacing="2">
+                <Label fx:id="labelJudul" text="Top Up" 
+                       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Label fx:id="lblSaldoHeader" text="Saldo: Rp0" 
+                       style="-fx-font-size: 12; -fx-text-fill: rgba(255,255,255,0.9);"/>
+            </VBox>
+        </HBox>
 
-        <Label text="Top Up Alfamart"
-               style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" />
+        <!-- Main Content -->
+        <VBox spacing="15" style="-fx-background-color: #f5f9ff; -fx-padding: 18px 20px 8px 20px;">
+            
+            <!-- Input Section -->
+            <VBox spacing="12" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);">
+                <Label text="💳 Masukkan Nominal" 
+                       style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #114585ff;"/>
+                
+                <TextField fx:id="txtNominal"
+                           promptText="Contoh: 50000"
+                           prefWidth="340"
+                           style="-fx-background-radius: 8; 
+                                  -fx-border-radius: 8; 
+                                  -fx-border-color: #c1d9ff; 
+                                  -fx-border-width: 1.5; 
+                                  -fx-background-color: white; 
+                                  -fx-padding: 12px 15px; 
+                                  -fx-font-size: 16px;
+                                  -fx-text-fill: #333;
+                                  -fx-font-weight: 500;"/>
+                
+                <Label text="Minimal Rp10.000" 
+                       style="-fx-font-size: 11; -fx-text-fill: #888; -fx-padding: 3px 0 0 5px;"/>
+            </VBox>
 
-        <Label fx:id="lblSaldo"
-               text="Saldo Saat Ini: Rp0"
-               style="-fx-text-fill: #E0E0E0; -fx-font-size: 14;" />
+            <!-- Quick Nominal Buttons -->
+            <VBox spacing="10">
+                <Label text="⚡ Pilih Nominal Cepat" 
+                       style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #114789ff;"/>
+                
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                    </columnConstraints>
+                    
+                    <!-- Row 1 -->
+                    <Button text="Rp10.000" prefWidth="175" prefHeight="48" 
+                            onAction="#handleNominalQuick"
+                            style="-fx-background-color: #e8f4ff; 
+                                   -fx-text-fill: #11417bff; 
+                                   -fx-font-size: 14; 
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: #b8d4f5;
+                                   -fx-border-radius: 8;
+                                   -fx-border-width: 1.5;
+                                   -fx-cursor: hand;"/>
+                    
+                    <Button text="Rp20.000" prefWidth="175" prefHeight="48" 
+                            onAction="#handleNominalQuick" GridPane.columnIndex="1"
+                            style="-fx-background-color: #e8f4ff; 
+                                   -fx-text-fill: #113e74ff; 
+                                   -fx-font-size: 14; 
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: #b8d4f5;
+                                   -fx-border-radius: 8;
+                                   -fx-border-width: 1.5;
+                                   -fx-cursor: hand;"/>
+                    
+                    <!-- Row 2 -->
+                    <Button text="Rp50.000" prefWidth="175" prefHeight="48" 
+                            onAction="#handleNominalQuick" GridPane.rowIndex="1"
+                            style="-fx-background-color: #e8f4ff; 
+                                   -fx-text-fill: #10427fff; 
+                                   -fx-font-size: 14; 
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: #b8d4f5;
+                                   -fx-border-radius: 8;
+                                   -fx-border-width: 1.5;
+                                   -fx-cursor: hand;"/>
+                    
+                    <Button text="Rp100.000" prefWidth="175" prefHeight="48" 
+                            onAction="#handleNominalQuick" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                            style="-fx-background-color: #e8f4ff; 
+                                   -fx-text-fill: #144b8eff; 
+                                   -fx-font-size: 14; 
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: #b8d4f5;
+                                   -fx-border-radius: 8;
+                                   -fx-border-width: 1.5;
+                                   -fx-cursor: hand;"/>
+                    
+                    <!-- Row 3 -->
+                    <Button text="Rp150.000" prefWidth="175" prefHeight="48" 
+                            onAction="#handleNominalQuick" GridPane.rowIndex="2"
+                            style="-fx-background-color: #e8f4ff; 
+                                   -fx-text-fill: #12498dff; 
+                                   -fx-font-size: 14; 
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: #b8d4f5;
+                                   -fx-border-radius: 8;
+                                   -fx-border-width: 1.5;
+                                   -fx-cursor: hand;"/>
+                    
+                    <Button text="Rp200.000" prefWidth="175" prefHeight="48" 
+                            onAction="#handleNominalQuick" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                            style="-fx-background-color: #e8f4ff; 
+                                   -fx-text-fill: #10417dff; 
+                                   -fx-font-size: 14; 
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: #b8d4f5;
+                                   -fx-border-radius: 8;
+                                   -fx-border-width: 1.5;
+                                   -fx-cursor: hand;"/>
+                </GridPane>
+            </VBox>
 
-        <TextField fx:id="txtNominal"
-                   promptText="Masukkan nominal"
-                   prefWidth="260"
-                   style="-fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #b8d4f5; -fx-border-width: 1.5; -fx-background-color: white; -fx-padding: 8 12; -fx-font-size: 14;" />
+            <!-- Info Box - Pembayaran via -->
+            <VBox spacing="8" style="-fx-background-color: #fef7e0; -fx-background-radius: 10; -fx-padding: 16px; -fx-border-color: #ffcc80; -fx-border-radius: 10; -fx-border-width: 1;">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="labelIcon" text="🏪" style="-fx-font-size: 22; -fx-min-width: 30;"/>
+                    <VBox spacing="4">
+                        <Label fx:id="labelInfoMetode" text="Pembayaran via Alfamart" 
+                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #f18348ff;"/>
+                        <Label fx:id="labelDetailInfo" text="Tunjukkan kode pembayaran di kasir Alfamart terdekat" 
+                               style="-fx-font-size: 12.5; -fx-text-fill: #666; -fx-wrap-text: true;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
 
-        <GridPane hgap="10" vgap="10">
-            <Button text="Rp10.000" prefWidth="120" onAction="#handleNominalQuick"/>
-            <Button text="Rp20.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.columnIndex="1"/>
-            <Button text="Rp50.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.rowIndex="1"/>
-            <Button text="Rp100.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <Button text="Rp150.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.rowIndex="2"/>
-            <Button text="Rp200.000" prefWidth="120" onAction="#handleNominalQuick" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-        </GridPane>
+            <!-- Tombol NEXT langsung ditempatkan -->
+            <VBox alignment="CENTER" spacing="10" style="-fx-padding: 12px 0 5px 0;">
+                <Button fx:id="btnNext" text="NEXT" prefWidth="360" prefHeight="48"
+                        onAction="#handleNext"
+                        style="-fx-background-color: #0f4a92ff; 
+                               -fx-text-fill: white; 
+                               -fx-font-size: 16; 
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 10;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(gaussian, rgba(26,95,180,0.3), 6, 0, 0, 3);"/>
+            </VBox>
 
-        <Button fx:id="btnNext" text="Next" prefWidth="260" onAction="#handleNext"
-                style="-fx-background-color: linear-gradient(to right, #1f5bb4ff, #2d6bc5); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 12; -fx-padding: 10 0;"/>
-
-        <Button text="← Kembali" prefWidth="260" onAction="#handleBack"
-                style="-fx-background-color: rgba(193, 218, 255, 0.85); -fx-text-fill: #0d47a1; -fx-font-weight: bold; -fx-background-radius: 12; -fx-padding: 8 0;"/>
+        </VBox>
     </VBox>
 </AnchorPane>

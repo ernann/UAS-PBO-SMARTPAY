@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.app.App;
 import com.app.SaldoManager;
+import com.app.TransaksiStorage;
 import com.app.UserData;
 
 import javafx.event.ActionEvent;
@@ -235,14 +236,75 @@ public class FormPembayaranController {
             if (UserData.validatePin(pin)) {
                 System.out.println("PIN BENAR!");
                 
-                boolean saldoCukup = SaldoManager.kurangiSaldo(PembayaranData.getTotal());
+                // Hitung total termasuk admin
+                long totalBayar = nominal + PembayaranData.getAdmin();
+                
+                boolean saldoCukup = SaldoManager.kurangiSaldo(totalBayar);
                 if (!saldoCukup) {
                     showError("Saldo tidak cukup!\n\n" +
                              "Saldo Anda: " + SaldoManager.formatSaldo() + "\n" +
-                             "Total yang dibutuhkan: " + PembayaranData.getTotal());
+                             "Total yang dibutuhkan: Rp " + String.format("%,d", totalBayar));
                     return;
                 }
                 System.out.println("Saldo berhasil dikurangi");
+                
+                // ======== SIMPAN RIWAYAT TRANSAKSI ========
+                String userId = UserData.getSmartId();
+                if (userId != null && !userId.isEmpty()) {
+                    // Generate kode transaksi unik
+                    String kodeTransaksi = "TRF-" + System.currentTimeMillis() % 100000;
+                    
+                    // Simpan sebagai PENGELUARAN untuk pengirim
+                    TransaksiStorage.tambahTransaksi(
+                        "TRANSFER", 
+                        "Transfer ke " + tfNama.getText() + " (" + bank + ")", 
+                        "PENGELUARAN", 
+                        nominal, 
+                        kodeTransaksi, 
+                        userId
+                    );
+                    System.out.println("✓ Transfer OUT ditambahkan ke riwayat: " + kodeTransaksi);
+                    
+                    // Jika transfer ke SmartPay, tambahkan juga sebagai PEMASUKAN untuk penerima
+                    if (bank.equals("SmartPay")) {
+                        // Cari user penerima berdasarkan nomor rekening
+                        com.app.User penerima = com.app.UserDatabase.getUserByRekening(noRek);
+                        if (penerima != null) {
+                            // Tambah saldo penerima
+                            penerima.tambahSaldo(nominal);
+                            com.app.UserDatabase.updateUser(penerima);
+                            System.out.println("✓ Saldo penerima ditambah: " + penerima.getNama() + 
+                                             " +" + nominal + ", total: " + penerima.getSaldoFormatted());
+                            
+                            // Simpan sebagai PEMASUKAN untuk penerima
+                            String kodeTransaksiPenerima = "TRF-IN-" + System.currentTimeMillis() % 100000;
+                            TransaksiStorage.tambahTransaksi(
+                                "TRANSFER", 
+                                "Transfer dari " + UserData.getNama(), 
+                                "PEMASUKAN", 
+                                nominal, 
+                                kodeTransaksiPenerima, 
+                                penerima.getSmartId()
+                            );
+                            System.out.println("✓ Transfer IN ditambahkan ke riwayat penerima");
+                        }
+                    }
+                    
+                    // Jika ada biaya admin, simpan juga sebagai transaksi admin
+                    if (PembayaranData.getAdmin() > 0) {
+                        String kodeAdmin = "ADM-" + System.currentTimeMillis() % 100000;
+                        TransaksiStorage.tambahTransaksi(
+                            "ADMIN", 
+                            "Biaya Admin Transfer " + bank, 
+                            "PENGELUARAN", 
+                            PembayaranData.getAdmin(), 
+                            kodeAdmin, 
+                            userId
+                        );
+                        System.out.println("✓ Biaya admin ditambahkan ke riwayat");
+                    }
+                }
+                // ===========================================
                 
                 PembayaranData.setNama(tfNama.getText());
                 PembayaranData.setBank(bank);
@@ -257,17 +319,14 @@ public class FormPembayaranController {
                 System.out.println("  Admin: " + PembayaranData.getAdmin());
                 System.out.println("  Total: " + PembayaranData.getTotal());
                 
-                if (bank.equals("SmartPay")) {
-                    tambahSaldoKePenerima(noRek, nominal);
-                }
-                
+                // Tambah ke riwayat pembayaran
                 RiwayatItem newItem = new RiwayatItem(
                     PembayaranData.getNama(),
                     PembayaranData.getBank(),
                     PembayaranData.getNoRek()
                 );
                 RiwayatPembayaran.tambah(newItem);
-                System.out.println("Ditambahkan ke riwayat: " + newItem);
+                System.out.println("Ditambahkan ke riwayat pembayaran: " + newItem);
                 
                 System.out.println("Pindah ke BuktiTransaksi...");
                 App.setRoot("BuktiTransaksi");
@@ -278,20 +337,6 @@ public class FormPembayaranController {
             }
         } else {
             System.out.println("PIN dialog dibatalkan");
-        }
-    }
-    
-    private void tambahSaldoKePenerima(String nomorRekening, long nominal) {
-        try {
-            com.app.User penerima = com.app.UserDatabase.getUserByRekening(nomorRekening);
-            if (penerima != null) {
-                penerima.tambahSaldo(nominal);
-                com.app.UserDatabase.updateUser(penerima);
-                System.out.println("✓ Saldo penerima ditambah: " + penerima.getNama() + 
-                                 " +" + nominal + ", total: " + penerima.getSaldoFormatted());
-            }
-        } catch (Exception e) {
-            System.err.println("✗ Gagal menambah saldo penerima: " + e.getMessage());
         }
     }
 

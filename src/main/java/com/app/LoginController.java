@@ -26,25 +26,33 @@ public class LoginController {
         User user = UserDatabase.authenticate(username, password);
         
         if (user != null) {
+            System.out.println("✅ Login BERHASIL!");
+            
+            // Set user data
             UserData.setNama(user.getNama());
             UserData.setSmartId(user.getSmartId());
             UserData.setEmail(user.getEmail());
             UserData.setNomorRekening(user.getNomorRekening());
             UserData.setSaldo(user.getSaldo());
             UserData.setPin(user.getPin());
-
             SaldoManager.setSaldo(user.getSaldo());
             
-            System.out.println("✅ Login BERHASIL!");
             System.out.println("   Nama: " + UserData.getNama());
             System.out.println("   Smart ID: " + UserData.getSmartId());
             System.out.println("   Rekening: " + UserData.getNomorRekening());
             System.out.println("   Saldo: " + UserData.getSaldoFormatted());
             
+            // Debug info
             UserDatabase.printAllUsers();
             UserDatabase.printAllRekening();
             
-            App.setRoot("Home");
+            // Navigasi ke Home
+            try {
+                App.setRoot("Home");
+            } catch (Exception e) {
+                System.err.println("❌ Error saat navigasi ke Home: " + e.getMessage());
+                showAlert("Error", "Gagal membuka halaman utama: " + e.getMessage());
+            }
             
         } else {
             showAlert("Login Gagal", "Username atau password salah!");
