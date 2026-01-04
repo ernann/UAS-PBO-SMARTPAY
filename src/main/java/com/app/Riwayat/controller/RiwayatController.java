@@ -1,8 +1,13 @@
-package com.app;
+package com.app.Riwayat.controller;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+
+import com.app.App;
+import com.app.SaldoManager;
+import com.app.TransaksiStorage;
+import com.app.UserData;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,7 +39,7 @@ public class RiwayatController {
             System.out.println("User: " + UserData.getNama());
             System.out.println("Smart ID: " + UserData.getSmartId());
             
-            labelTitle.setText("📋 Riwayat Transaksi");
+            labelTitle.setText("Riwayat Transaksi");
             setupFilterBulan();
             tampilkanTransaksiUser();
             
@@ -236,13 +241,12 @@ public class RiwayatController {
         Label lblKode = new Label("🔑 " + t.getKodeTransaksi());
         lblKode.setStyle("-fx-font-size: 11px; -fx-text-fill: #666; -fx-font-style: italic;");
         
-        String jenisIcon = getJenisIcon(t.getJenis());
-        Label lblJenisDetail = new Label(jenisIcon + " " + t.getJenis());
+        Label lblJenisDetail = new Label(" " + t.getJenis());
         lblJenisDetail.setStyle("-fx-font-size: 11px; -fx-text-fill: #1a5fb4; -fx-font-weight: 500;");
         
         baris3.getChildren().addAll(lblTanggal, lblKode, lblJenisDetail);
         
-        Label lblDetailIcon = new Label("📄 Lihat Detail");
+        Label lblDetailIcon = new Label("Lihat Detail");
         lblDetailIcon.setStyle("-fx-font-size: 11px; -fx-text-fill: #1a5fb4; -fx-font-weight: 500; -fx-padding: 5px 0 0 0;");
         
         kartu.getChildren().addAll(baris1, lblDeskripsi, baris3, lblDetailIcon);
@@ -255,66 +259,61 @@ public class RiwayatController {
             dialogStage.setTitle("Bukti Transaksi");
             dialogStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
             
-            // MAIN CONTAINER - Gradien background
             VBox mainContainer = new VBox(0);
             mainContainer.setStyle(
                 "-fx-background-color: linear-gradient(to bottom, #d0e7ff, #e8f4ff); " +
                 "-fx-background-radius: 0;"
             );
             
-            // HEADER SECTION - Biru dengan tombol kembali yang bagus
-            VBox headerSection = new VBox(12);
-            headerSection.setStyle(
-                "-fx-background-color: linear-gradient(to bottom, #1a5fb4, #1a5fb4); " +
-                "-fx-padding: 15px 20px 25px 20px;"
-            );
+                VBox headerSection = new VBox(12);
+    headerSection.setStyle(
+        "-fx-background-color: linear-gradient(to bottom, #1a5fb4, #1a5fb4); " +
+        "-fx-padding: 15px 20px 25px 20px;"
+    );
+
             
             // Tombol Kembali yang bagus
             Button btnKembali = new Button("Kembali");
             btnKembali.setStyle(
-                "-fx-background-color: rgba(209, 241, 255, 1); " +
-                "-fx-text-fill: #0e4f9dff; " +
+                "-fx-background-color: #f0f8ff; " +
+                "-fx-text-fill: #1a5fb4; " +
                 "-fx-font-size: 14px; " +
-                "-fx-font-weight: 600; " +
                 "-fx-cursor: hand; " +
-                "-fx-padding: 8px 20px; " +
+                "-fx-padding: 6px 10px; " +
                 "-fx-background-radius: 20px; " +
-                "-fx-border-color: rgba(255, 255, 255, 0.3); " +
                 "-fx-border-width: 1px; " +
-                "-fx-border-radius: 20px;"
+                "-fx-border-radius: 20px;" +
+                "-fx-font-weight: bold"
             );
+            btnKembali.setPrefWidth(100);
             btnKembali.setOnAction(e -> dialogStage.close());
             
             // Judul dan ikon di tengah
             VBox titleBox = new VBox(4);
             titleBox.setStyle("-fx-alignment: center;");
-            
-            Label iconLabel = new Label("📄");
-            iconLabel.setStyle("-fx-font-size: 32px; -fx-text-fill: rgba(255, 255, 255, 0.9);");
-            
             Label mainTitle = new Label("Bukti Transaksi");
             mainTitle.setStyle(
-                "-fx-font-size: 22px; " +
+                "-fx-font-size: 30px; " +
                 "-fx-font-weight: 700; " +
                 "-fx-text-fill: #e6f7ff;"
             );
             
             Label subtitle = new Label("Detail lengkap transaksi");
             subtitle.setStyle(
-                "-fx-font-size: 13px; " +
+                "-fx-font-size: 15px; " +
                 "-fx-text-fill: rgba(255, 255, 255, 0.8); " +
                 "-fx-font-weight: 400;"
             );
             
-            titleBox.getChildren().addAll(iconLabel, mainTitle, subtitle);
+            titleBox.getChildren().addAll(mainTitle, subtitle);
             headerSection.getChildren().addAll(btnKembali, titleBox);
             
-            // MAIN CONTENT SECTION
             VBox contentSection = new VBox(16);
             contentSection.setStyle(
                 "-fx-background-color: transparent; " +
-                "-fx-padding: 0 20px 25px 20px;"
+                "-fx-padding: 20px 20px 25px 20px;"
             );
+
             
             // KARTU UTAMA
             VBox mainCard = new VBox(0);
@@ -334,10 +333,8 @@ public class RiwayatController {
                 "-fx-alignment: center;"
             );
             
-            // Transaction Type Icon and Label
-            String jenisIcon = getJenisIcon(t.getJenis());
             String displayJenis = t.getDisplayJenis();
-            Label transaksiLabel = new Label(jenisIcon + " " + displayJenis);
+            Label transaksiLabel = new Label( " " + displayJenis);
             transaksiLabel.setStyle(
                 "-fx-font-size: 18px; " +
                 "-fx-font-weight: 700; " +
@@ -352,27 +349,26 @@ public class RiwayatController {
                 "-fx-text-fill: #666666;"
             );
             
-            // Amount - sesuai dengan data transaksi
             Label amountLabel = new Label(t.getJumlahFormatted());
-            if (t.getTipe().equals("PEMASUKAN")) {
-                amountLabel.setStyle(
-                    "-fx-font-size: 28px; " +
-                    "-fx-font-weight: 800; " +
-                    "-fx-text-fill: linear-gradient(to right, #2e7d32); " +
-                    "-fx-padding: 10px 0 12px 0; " +
-                    "-fx-border-color: #e8f0ff; " +
-                    "-fx-border-width: 0 0 1px 0;"
-                );
-            } else {
-                amountLabel.setStyle(
-                    "-fx-font-size: 28px; " +
-                    "-fx-font-weight: 800; " +
-                    "-fx-text-fill: linear-gradient(to right, #e53935); " +
-                    "-fx-padding: 10px 0 12px 0; " +
-                    "-fx-border-color: #e8f0ff; " +
-                    "-fx-border-width: 0 0 1px 0;"
-                );
-            }
+        if (t.getTipe().equals("PEMASUKAN")) {
+            amountLabel.setStyle(
+                    "-fx-font-size: 28px;" +
+                    "-fx-font-weight: 800;" +
+                    "-fx-text-fill: #2e7d32;" +
+                    "-fx-padding: 10 0 12 0;" +
+                    "-fx-border-color: #e8f0ff;" +
+                    "-fx-border-width: 0 0 1 0;"
+            );
+        } else {
+            amountLabel.setStyle(
+                    "-fx-font-size: 28px;" +
+                    "-fx-font-weight: 800;" +
+                    "-fx-text-fill: #e53935;" +
+                    "-fx-padding: 10 0 12 0;" +
+                    "-fx-border-color: #e8f0ff;" +
+                    "-fx-border-width: 0 0 1 0;"
+            );
+        }
             
             cardHeader.getChildren().addAll(transaksiLabel, accountLabel, amountLabel);
             
@@ -383,7 +379,7 @@ public class RiwayatController {
                 "-fx-background-color: #fafcff;"
             );
             
-            Label detailTitle = new Label("📋 Detail Transaksi");
+            Label detailTitle = new Label("Detail Transaksi");
             detailTitle.setStyle(
                 "-fx-font-size: 16px; " +
                 "-fx-font-weight: 600; " +
@@ -392,10 +388,8 @@ public class RiwayatController {
             
             detailTitleBox.getChildren().add(detailTitle);
             
-            // Detail Items Container
             VBox detailItemsContainer = new VBox(0);
             
-            // 1. Waktu - tanpa icon
             HBox waktuRow = createDetailRow(
                 "Waktu",
                 t.getWaktu().format(DateTimeFormatter.ofPattern("dd MMMM yyyy • HH:mm:ss", new Locale("id", "ID")))
@@ -464,7 +458,7 @@ public class RiwayatController {
                 "-fx-padding: 8px;"
             );
             
-            Label footerLabel = new Label("✅ Transaksi telah tercatat dengan aman");
+            Label footerLabel = new Label("Transaksi telah tercatat dengan aman");
             footerLabel.setStyle(
                 "-fx-font-size: 12px; " +
                 "-fx-text-fill: #666666;"
@@ -550,16 +544,6 @@ public class RiwayatController {
         
         row.getChildren().addAll(lblLabel, spacer, lblValue);
         return row;
-    }
-
-    private String getJenisIcon(String jenis) {
-        switch (jenis.toUpperCase()) {
-            case "TOPUP": return "💰";
-            case "TRANSFER": return "↔️";
-            case "PAYMENT": return "💳";
-            case "ADMIN": return "⚙️";
-            default: return "📋";
-        }
     }
 
     private String getNamaBulan(int bulanAngka) {

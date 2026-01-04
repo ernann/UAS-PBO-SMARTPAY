@@ -11,55 +11,51 @@
 
 <VBox xmlns="http://javafx.com/javafx/17.0.2-ea" 
       xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="com.app.RiwayatController"
+      fx:controller="com.app.Riwayat.controller.RiwayatController"
       style="-fx-background-color: #f0f8ff;"
-      spacing="0">
+      spacing="10">
     
-    <!-- HEADER DENGAN TOMBOL BACK -->
-    <HBox style="-fx-background-color: linear-gradient(to right, #1a5fb4, #1a5fb4); 
-                 -fx-padding: 12px 16px; 
-                 -fx-border-color: #c2e0ff; 
-                 -fx-border-width: 0 0 1.5px 0;" 
-          alignment="CENTER" spacing="10">
-        
-        <!-- TOMBOL BACK -->
+<VBox style="-fx-background-color: linear-gradient(to right, #1a5fb4, #1a5fb4); 
+             -fx-padding: 20px 20px; 
+             -fx-border-color: #c2e0ff; 
+             -fx-border-width: 0 0 1.5px 0;"
+      spacing="5">
+
+    <HBox alignment="CENTER_LEFT">
         <Button onAction="#handleBack"
-                style="-fx-background-color: #9fd7ff; 
-                       -fx-border-color: #1378b7; 
-                       -fx-border-radius: 12px; 
-                       -fx-background-radius: 12px; 
-                       -fx-cursor: hand; 
-                       -fx-padding: 8px; 
-                       -fx-min-width: 40px; 
-                       -fx-min-height: 40px;">
+                prefWidth="100"
+                style="-fx-background-color: #f0f8ff;
+                       -fx-background-radius: 20;
+                       -fx-cursor: hand;
+                       -fx-padding: 6 10 6 10;">
             <graphic>
-                <Label text="←" 
-                       style="-fx-font-size: 18px; 
-                              -fx-text-fill: #11487aff; 
-                              -fx-font-weight: bold;"/>
+                <HBox alignment="CENTER">
+                    <Label text="Kembali"
+                           style="-fx-text-fill: #1a5fb4;
+                                  -fx-font-size: 14px;
+                                  -fx-font-weight: bold;"/>
+                </HBox>
             </graphic>
         </Button>
-        
-        <!-- JUDUL -->
-        <Region HBox.hgrow="ALWAYS"/>
-        <Label fx:id="labelTitle" text="📋 Riwayat Transaksi"
-               style="-fx-font-size: 24px; 
-                      -fx-font-weight: 700; 
-                      -fx-text-fill: white;"/>
-        <Region HBox.hgrow="ALWAYS"/>
-        
-        <!-- TOMBOL REFRESH DIHAPUS DARI SINI -->
-        
     </HBox>
 
-    <!-- FILTER BULAN -->
-    <HBox fx:id="filterContainer"
-          style="-fx-background-color: #d6e9faff; 
-                 -fx-padding: 15px 20px 10px 20px; 
-                 -fx-border-color: #d0e7ff; 
-                 -fx-border-width: 0 0 1px 0;"
-          alignment="CENTER_LEFT"
-          spacing="15">
+    <Label fx:id="labelTitle"
+           text="Riwayat Transaksi"
+           style="-fx-font-size: 24px; 
+                  -fx-font-weight: 700; 
+                  -fx-text-fill: white;"
+           alignment="CENTER"
+           maxWidth="Infinity"/>
+</VBox>
+
+  <HBox fx:id="filterContainer"
+      style="-fx-background-color: #d6e9faff; 
+             -fx-padding: 12px 20px 5px 20px; 
+             -fx-border-color: #d0e7ff; 
+             -fx-border-width: 0 0 1px 0;"
+      alignment="CENTER_LEFT"
+      spacing="5">
+
         
         <Label text="Filter Bulan:" 
                style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1a5fb4;"/>
@@ -74,10 +70,8 @@
                          -fx-padding: 8px 12px; 
                          -fx-font-size: 14px; 
                          -fx-font-weight: 500;"/>
-        
     </HBox>
 
-    <!-- KONTEN UTAMA -->
     <ScrollPane fitToWidth="true" 
                 hbarPolicy="NEVER" 
                 vbarPolicy="AS_NEEDED"
@@ -85,13 +79,12 @@
                        -fx-border-color: #f0f8ff;"
                 VBox.vgrow="ALWAYS">
         <content>
-            <VBox fx:id="riwayatContainer" 
-                  style="-fx-background-color: #f0f8ff; 
-                         -fx-padding: 16px; 
-                         -fx-spacing: 12px;"
-                  spacing="12">
-                <!-- Content akan diisi oleh controller -->
-            </VBox>
+         <VBox fx:id="riwayatContainer" 
+      style="-fx-background-color: #f0f8ff; 
+             -fx-padding: 8px 16px 16px 16px; 
+             -fx-spacing: 16px;"
+      spacing="12">
+</VBox>
         </content>
     </ScrollPane>
 </VBox>

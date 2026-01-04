@@ -228,7 +228,7 @@ public class UserDatabase {
                     
                     if (nama == null) nama = "User";
                     if (rekening == null) rekening = generateRandomRekening();
-                    if (saldoStr == null) saldoStr = "0"; // Default saldo 0
+                    if (saldoStr == null) saldoStr = "0";
                     if (pin == null) pin = "123456";
                     
                     long saldo = Long.parseLong(saldoStr);
@@ -284,7 +284,7 @@ public class UserDatabase {
             
             if (nama == null) nama = "User";
             if (rekening == null) rekening = generateRandomRekening();
-            if (saldoStr == null) saldoStr = "0"; // Default saldo 0
+            if (saldoStr == null) saldoStr = "0"; 
             if (pin == null) pin = "123456";
             
             long saldo = Long.parseLong(saldoStr);

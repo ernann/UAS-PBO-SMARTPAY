@@ -9,12 +9,10 @@ import javafx.scene.control.ListCell;
 
 public class MixedCell extends ListCell<Object> {
     
-    // CellFactory Interface
     public interface CellFactory {
         Node createCell(Object item, Consumer<Transaction> onOpenDetail);
     }
     
-    // Default CellFactory Implementation
     public static class DefaultCellFactory implements CellFactory {
         private final Consumer<Transaction> onOpenDetail;
         
@@ -40,7 +38,6 @@ public class MixedCell extends ListCell<Object> {
     private final Consumer<Transaction> onOpenDetail;
     private CellFactory cellFactory;
     
-    // Constructor overloading
     public MixedCell(Consumer<Transaction> onOpenDetail) {
         this(onOpenDetail, new DefaultCellFactory(onOpenDetail));
     }
@@ -64,7 +61,6 @@ public class MixedCell extends ListCell<Object> {
         }
     }
     
-    // Setter untuk mengganti factory di runtime (polymorphism)
     public void setCellFactory(CellFactory cellFactory) {
         this.cellFactory = cellFactory;
     }

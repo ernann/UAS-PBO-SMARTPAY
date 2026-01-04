@@ -12,14 +12,12 @@ import javafx.scene.layout.VBox;
 
 public class TransactionCell {
     
-    // INTERFACE untuk Cell Action
     public interface CellAction {
         void onCellClick(Transaction transaction);
         void onCellHover(Transaction transaction, boolean isHovering);
         void onCellUpdate(Transaction transaction);
     }
     
-    // DEFAULT Cell Action Implementation
     public static class DefaultCellAction implements CellAction {
         @Override
         public void onCellClick(Transaction transaction) {
@@ -28,16 +26,13 @@ public class TransactionCell {
         
         @Override
         public void onCellHover(Transaction transaction, boolean isHovering) {
-            // Default implementation does nothing
         }
         
         @Override
         public void onCellUpdate(Transaction transaction) {
-            // Default implementation does nothing
         }
     }
     
-    // CUSTOM Cell Action untuk demonstrasi polymorphism
     public static class CustomCellAction implements CellAction {
         private int clickCount = 0;
         
@@ -60,7 +55,6 @@ public class TransactionCell {
         }
     }
     
-    // UTILITY Class dengan static methods
     public static class CellUtils {
         public static String formatAmount(int amount, boolean showSign) {
             String sign = amount < 0 ? "-" : (showSign ? "+" : "");
@@ -76,7 +70,6 @@ public class TransactionCell {
         }
     }
     
-    // MAIN TransactionCell class
     private final HBox root = new HBox();
     private final VBox left = new VBox();
     private final Label typeLabel = new Label();
@@ -85,7 +78,6 @@ public class TransactionCell {
     private Consumer<Transaction> onOpenDetail;
     private CellAction cellAction = new DefaultCellAction();
 
-    // Constructor overloading
     public TransactionCell() {
         this(null);
     }
@@ -96,7 +88,7 @@ public class TransactionCell {
     }
     
     private void initialize() {
-        // Setup layout yang lebih elegan - BACKGROUND BIRU MUDA
+
         root.setStyle("-fx-background-color: #e6f3ff; " +
                      "-fx-padding: 18px 20px; " +
                      "-fx-alignment: center-left; " +
@@ -109,7 +101,6 @@ public class TransactionCell {
         
         left.setStyle("-fx-spacing: 6px;");
         
-        // Styling untuk labels yang lebih modern
         typeLabel.setStyle("-fx-font-size: 13px; " +
                           "-fx-text-fill: #666666; " +
                           "-fx-font-weight: 500; " +
@@ -134,7 +125,6 @@ public class TransactionCell {
         root.setAlignment(Pos.CENTER_LEFT);
         amountLabel.setAlignment(Pos.CENTER_RIGHT);
 
-        // Event handlers
         setupEventHandlers();
     }
     
@@ -185,7 +175,6 @@ public class TransactionCell {
         });
     }
     
-    // Method overloading
     public void update(Transaction t) {
         update(t, true);
     }
@@ -195,19 +184,15 @@ public class TransactionCell {
         
         cellAction.onCellUpdate(t);
         
-        // Set type (Transfer/Pembayaran) dengan ikon
         String categoryIcon = getCategoryIcon(t.getCategory());
         typeLabel.setText(categoryIcon + " " + t.getCategory());
         
-        // Set detail: "BANK - NAMA" atau hanya "NAMA"
         String detailText = CellUtils.getDisplayText(t);
         detailLabel.setText(detailText);
         
-        // Format amount dengan +/- dan warna
         String amountText = CellUtils.formatAmount(t.getAmount(), showSign);
         amountLabel.setText(amountText);
         
-        // Set style berdasarkan tipe transaksi
         if (CellUtils.isExpense(t)) {
             amountLabel.setStyle("-fx-font-size: 16px; " +
                                "-fx-font-weight: 700; " +
@@ -236,7 +221,6 @@ public class TransactionCell {
         }
     }
     
-    // Setter untuk polymorphism runtime
     public void setCellAction(CellAction cellAction) {
         this.cellAction = cellAction != null ? cellAction : new DefaultCellAction();
     }
@@ -249,7 +233,6 @@ public class TransactionCell {
         return root;
     }
     
-    // Factory method
     public static TransactionCell createCell(Consumer<Transaction> onOpenDetail) {
         return new TransactionCell(onOpenDetail);
     }

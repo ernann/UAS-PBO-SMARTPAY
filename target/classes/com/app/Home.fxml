@@ -17,7 +17,6 @@
 
     <children>
 
-        <!-- BAGIAN ATAS - TETAP -->
         <VBox alignment="TOP_CENTER" prefHeight="350.0" prefWidth="400.0"
               style="-fx-background-color: #0d47a1;"
               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -27,8 +26,6 @@
             </padding>
 
             <children>
-
-                <!-- Profile + Logout -->
                 <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
                     <children>
                         <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
@@ -40,14 +37,12 @@
                             <HBox.margin><Insets left="10"/></HBox.margin>
                         </VBox>
 
-                        <!-- Icon Logout dengan Tooltip -->
                         <Button fx:id="btnLogout" onAction="#handleLogout"
                                 style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 15; -fx-cursor: hand;"
                                 HBox.hgrow="ALWAYS">
                             <graphic>
                                 <ImageView fitHeight="25" fitWidth="25" preserveRatio="true">
                                     <image>
-                                        <!-- Logo Logout -->
                                         <Image url="https://img.icons8.com/ios-glyphs/30/ffffff/exit.png"/>
                                     </image>
                                 </ImageView>
@@ -59,11 +54,9 @@
                                 <Insets left="20"/>
                             </HBox.margin>
                         </Button>
-
                     </children>
                 </HBox>
 
-                <!-- Nomor Rekening -->
                 <Label text="Nomor Rekening" textFill="WHITE">
                     <font><Font size="20"/></font>
                     <VBox.margin><Insets top="30"/></VBox.margin>
@@ -74,38 +67,30 @@
                     <VBox.margin><Insets top="5"/></VBox.margin>
                 </Label>
 
-                <!-- TOTAL SALDO -->
                 <Button prefHeight="60" prefWidth="280"
                         style="-fx-background-color: #c1d9ffff; -fx-background-radius: 15;">
                     <graphic>
                         <HBox alignment="CENTER_LEFT" spacing="20" prefWidth="260">
                             <children>
 
-                                <!-- Label Kiri -->
                                 <Label text="Total Saldo" textFill="#0d47a1">
                                     <font><Font size="16"/></font>
                                 </Label>
 
-                                <!-- Spacer -->
                                 <HBox HBox.hgrow="ALWAYS"/>
 
-                                <!-- Nominal -->
                                 <Label fx:id="labelSaldo" text="Rp3000.000" textFill="#0d47a1">
                                     <font><Font name="System Bold" size="20"/></font>
                                 </Label>
-
                             </children>
                         </HBox>
                     </graphic>
-
                     <VBox.margin><Insets top="30"/></VBox.margin>
                     <padding><Insets left="20" right="20"/></padding>
                 </Button>
-
             </children>
         </VBox>
 
-        <!-- BAGIAN MENU BAWAH - YANG DIUBAH -->
         <VBox alignment="CENTER" layoutY="320.0" prefHeight="380.0" prefWidth="400.0"
               style="-fx-background-color: #cae4ffff; -fx-background-radius: 30 30 0 0;"
               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -116,26 +101,21 @@
 
             <children>
 
-                <!-- Judul Menu -->
                 <Label text="Layanan" style="-fx-text-fill: #0d47a1; -fx-font-size: 22px; -fx-font-weight: bold;">
                     <VBox.margin><Insets bottom="25"/></VBox.margin>
                 </Label>
 
-                <!-- Container untuk 4 tombol fitur -->
                 <VBox alignment="CENTER" spacing="30">
                     
-                    <!-- Baris 1 -->
                     <HBox alignment="CENTER" spacing="35">
                         <children>
 
-                            <!-- TOP UP -->
                             <Button alignment="CENTER" contentDisplay="TOP" onAction="#handleTopUp"
                                     prefHeight="140" prefWidth="140"
                                     style="-fx-background-color: #0d47a1; -fx-background-radius: 20;"
                                     text="Top Up" textFill="WHITE">
                                 <graphic>
                                     <ImageView fitHeight="45" fitWidth="45" preserveRatio="true">
-                                        <!-- Logo Top Up/Money -->
                                         <Image url="https://img.icons8.com/ios-filled/50/ffffff/money.png"/>
                                     </ImageView>
                                 </graphic>
@@ -143,14 +123,12 @@
                                 <padding><Insets top="8"/></padding>
                             </Button>
 
-                            <!-- TRANSFER -->
                             <Button alignment="CENTER" contentDisplay="TOP" onAction="#handlePembayaran"
                                     prefHeight="140" prefWidth="140"
                                     style="-fx-background-color: #0d47a1; -fx-background-radius: 20;"
                                     text="Transfer" textFill="WHITE">
                                 <graphic>
                                     <ImageView fitHeight="45" fitWidth="45" preserveRatio="true">
-                                        <!-- Logo Transfer/Arrow atau Send Money -->
                                         <Image url="https://img.icons8.com/ios-filled/50/ffffff/money-transfer.png"/>
                                     </ImageView>
                                 </graphic>
@@ -161,18 +139,15 @@
                         </children>
                     </HBox>
 
-                    <!-- Baris 2 -->
                     <HBox alignment="CENTER" spacing="35">
                         <children>
 
-                            <!-- REMINDER -->
                             <Button alignment="CENTER" contentDisplay="TOP" fx:id="btnReminder" onAction="#handleReminder"
                                     prefHeight="140" prefWidth="140"
                                     style="-fx-background-color: #0d47a1; -fx-background-radius: 20;"
                                     text="Reminder" textFill="WHITE">
                                 <graphic>
                                     <ImageView fitHeight="45" fitWidth="45" preserveRatio="true">
-                                        <!-- Logo Alarm/Reminder -->
                                         <Image url="https://img.icons8.com/ios-filled/50/ffffff/alarm.png"/>
                                     </ImageView>
                                 </graphic>
@@ -180,31 +155,23 @@
                                 <padding><Insets top="8"/></padding>
                             </Button>
 
-                            <!-- RIWAYAT -->
                             <Button alignment="CENTER" contentDisplay="TOP" onAction="#handleRiwayat"
                                     prefHeight="140" prefWidth="140"
                                     style="-fx-background-color: #0d47a1; -fx-background-radius: 20;"
                                     text="Riwayat" textFill="WHITE">
                                 <graphic>
                                     <ImageView fitHeight="45" fitWidth="45" preserveRatio="true">
-                                        <!-- Logo History/Riwayat -->
                                         <Image url="https://img.icons8.com/ios-filled/50/ffffff/time-machine.png"/>
                                     </ImageView>
                                 </graphic>
                                 <font><Font name="System Bold" size="15"/></font>
                                 <padding><Insets top="8"/></padding>
                             </Button>
-
                         </children>
                     </HBox>
-                    
                 </VBox>
-
-                <!-- Space kosong di bawah -->
                 <VBox VBox.vgrow="ALWAYS"/>
-
             </children>
         </VBox>
-
     </children>
 </AnchorPane>

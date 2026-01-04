@@ -1,4 +1,11 @@
-package com.app;
+package com.app.Registrasi;
+
+import com.app.App;
+import com.app.SaldoManager;
+import com.app.Transfer.RiwayatPembayaran;
+import com.app.User;
+import com.app.UserData;
+import com.app.UserDatabase;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -31,6 +38,7 @@ public class LoginController {
             // Set user data
             UserData.setNama(user.getNama());
             UserData.setSmartId(user.getSmartId());
+            RiwayatPembayaran.load();
             UserData.setEmail(user.getEmail());
             UserData.setNomorRekening(user.getNomorRekening());
             UserData.setSaldo(user.getSaldo());

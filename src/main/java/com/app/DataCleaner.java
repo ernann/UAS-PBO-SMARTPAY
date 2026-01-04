@@ -44,13 +44,11 @@ public class DataCleaner {
     private static void hapusDataDummy() {
         System.out.println("\n=== MENGHAPUS DATA DUMMY ===");
         
-        // Load dulu untuk melihat data sebelum dihapus
         java.util.List<TransaksiStorage.TransaksiRecord> semuaData = 
             TransaksiStorage.getSemuaTransaksi();
         
         System.out.println("Total data sebelum dihapus: " + semuaData.size());
         
-        // Tampilkan 5 data pertama
         if (!semuaData.isEmpty()) {
             System.out.println("\nContoh data yang akan dihapus:");
             for (int i = 0; i < Math.min(5, semuaData.size()); i++) {
@@ -113,17 +111,14 @@ public class DataCleaner {
             return;
         }
         
-        // Kelompokkan per user
         java.util.Map<String, Integer> transaksiPerUser = new java.util.HashMap<>();
         java.util.Map<String, Long> saldoPerUser = new java.util.HashMap<>();
         
         for (TransaksiStorage.TransaksiRecord t : semuaData) {
             String userId = t.getUserId();
             
-            // Hitung jumlah transaksi per user
             transaksiPerUser.put(userId, transaksiPerUser.getOrDefault(userId, 0) + 1);
             
-            // Hitung saldo per user
             long jumlah = t.getJumlah();
             if (t.getTipe().equals("PEMASUKAN")) {
                 saldoPerUser.put(userId, saldoPerUser.getOrDefault(userId, 0L) + jumlah);
@@ -142,7 +137,6 @@ public class DataCleaner {
                              (saldo >= 0 ? "+" : "") + SaldoManager.formatSaldo(saldo));
         }
         
-        // Hitung statistik umum
         long totalPemasukan = 0;
         long totalPengeluaran = 0;
         int countTopup = 0;
@@ -169,7 +163,6 @@ public class DataCleaner {
         System.out.println("  Jumlah TOP UP: " + countTopup);
         System.out.println("  Jumlah TRANSFER: " + countTransfer);
         
-        // Tanggal transaksi pertama dan terakhir
         if (!semuaData.isEmpty()) {
             java.util.Collections.sort(semuaData, (t1, t2) -> 
                 t1.getWaktu().compareTo(t2.getWaktu()));

@@ -33,7 +33,6 @@ public class Transaction {
         this.category = category;
     }
     
-    // Getters
     public String getDate() { return date; }
     public String getTime() { return time; }
     public String getBank() { return bank; }
@@ -43,7 +42,6 @@ public class Transaction {
     public String getType() { return type; }
     public String getCategory() { return category; }
     
-    // Setters
     public void setDate(String date) { this.date = date; }
     public void setTime(String time) { this.time = time; }
     public void setBank(String bank) { this.bank = bank; }

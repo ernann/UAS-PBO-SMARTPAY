@@ -1,10 +1,10 @@
 package com.app;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 public class VerifController {
 
@@ -12,7 +12,6 @@ public class VerifController {
     @FXML private Button btnVerifikasi;
     @FXML private Button btnKirimUlang;
 
-    // Simulasi kode OTP yang dikirim (biasanya dari server)
     private final String kodeOTPBenar = "123456";
 
     @FXML
@@ -22,7 +21,6 @@ public class VerifController {
             showAlert(AlertType.WARNING, "Peringatan", "Kode verifikasi tidak boleh kosong!");
         } else if (kodeInput.equals(kodeOTPBenar)) {
             showAlert(AlertType.INFORMATION, "Sukses", "Akun berhasil diverifikasi!");
-            // TODO: pindah ke halaman berikutnya (misal dashboard)
         } else {
             showAlert(AlertType.ERROR, "Error", "Kode verifikasi salah!");
         }
@@ -30,9 +28,7 @@ public class VerifController {
 
     @FXML
     private void handleKirimUlang() {
-        // Simulasi kirim ulang kode
         showAlert(AlertType.INFORMATION, "Info", "Kode verifikasi baru telah dikirim ke email Anda.");
-        // TODO: implementasi kirim kode sebenarnya
     }
 
     private void showAlert(AlertType type, String title, String message) {

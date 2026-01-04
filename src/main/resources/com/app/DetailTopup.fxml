@@ -4,31 +4,29 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.app.AlfatopupController"
+            fx:controller="com.app.Topup.DetailTopup"
             prefWidth="400" prefHeight="700"
             style="-fx-background-color: #f5f9ff;">
 
-    <!-- Header -->
     <VBox spacing="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-        
-        <!-- Header Blue -->
-        <HBox style="-fx-background-color: #114b91ff; -fx-padding: 20px 15px;" 
-              alignment="CENTER_LEFT" spacing="12">
-            <Button text="←" 
-                    onAction="#handleBack"
-                    style="-fx-font-size: 18; -fx-background-color: rgba(154, 218, 255, 1); -fx-text-fill: #114585ff; -fx-background-radius: 15; -fx-min-width: 38; -fx-min-height: 38; -fx-cursor: hand;"/>
-            <VBox spacing="2">
-                <Label fx:id="labelJudul" text="Top Up" 
-                       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: white;"/>
-                <Label fx:id="lblSaldoHeader" text="Saldo: Rp0" 
-                       style="-fx-font-size: 12; -fx-text-fill: rgba(255,255,255,0.9);"/>
-            </VBox>
-        </HBox>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20;">
+                <Button onAction="#handleBack"
+                        prefWidth="100"
+                        style="-fx-background-color: #1a5fb4;
+                               -fx-background-radius: 20;
+                               -fx-cursor: hand;
+                               -fx-padding: 6 10 6 10;">
+                    <graphic>
+                        <Label text="Kembali"
+                               style="-fx-text-fill: #f0f8ff;
+                                      -fx-font-size: 14px;
+                                      -fx-font-weight: bold;"/>
+                    </graphic>
+                </Button>
+            </HBox>
 
-        <!-- Main Content -->
         <VBox spacing="15" style="-fx-background-color: #f5f9ff; -fx-padding: 18px 20px 8px 20px;">
             
-            <!-- Input Section -->
             <VBox spacing="12" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);">
                 <Label text="💳 Masukkan Nominal" 
                        style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #114585ff;"/>
@@ -50,7 +48,6 @@
                        style="-fx-font-size: 11; -fx-text-fill: #888; -fx-padding: 3px 0 0 5px;"/>
             </VBox>
 
-            <!-- Quick Nominal Buttons -->
             <VBox spacing="10">
                 <Label text="⚡ Pilih Nominal Cepat" 
                        style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #114789ff;"/>
@@ -61,7 +58,6 @@
                         <ColumnConstraints percentWidth="50"/>
                     </columnConstraints>
                     
-                    <!-- Row 1 -->
                     <Button text="Rp10.000" prefWidth="175" prefHeight="48" 
                             onAction="#handleNominalQuick"
                             style="-fx-background-color: #e8f4ff; 
@@ -86,7 +82,6 @@
                                    -fx-border-width: 1.5;
                                    -fx-cursor: hand;"/>
                     
-                    <!-- Row 2 -->
                     <Button text="Rp50.000" prefWidth="175" prefHeight="48" 
                             onAction="#handleNominalQuick" GridPane.rowIndex="1"
                             style="-fx-background-color: #e8f4ff; 
@@ -111,7 +106,6 @@
                                    -fx-border-width: 1.5;
                                    -fx-cursor: hand;"/>
                     
-                    <!-- Row 3 -->
                     <Button text="Rp150.000" prefWidth="175" prefHeight="48" 
                             onAction="#handleNominalQuick" GridPane.rowIndex="2"
                             style="-fx-background-color: #e8f4ff; 
@@ -138,7 +132,6 @@
                 </GridPane>
             </VBox>
 
-            <!-- Info Box - Pembayaran via -->
             <VBox spacing="8" style="-fx-background-color: #fef7e0; -fx-background-radius: 10; -fx-padding: 16px; -fx-border-color: #ffcc80; -fx-border-radius: 10; -fx-border-width: 1;">
                 <HBox spacing="10" alignment="CENTER_LEFT">
                     <Label fx:id="labelIcon" text="🏪" style="-fx-font-size: 22; -fx-min-width: 30;"/>
@@ -151,7 +144,6 @@
                 </HBox>
             </VBox>
 
-            <!-- Tombol NEXT langsung ditempatkan -->
             <VBox alignment="CENTER" spacing="10" style="-fx-padding: 12px 0 5px 0;">
                 <Button fx:id="btnNext" text="NEXT" prefWidth="360" prefHeight="48"
                         onAction="#handleNext"
@@ -163,7 +155,6 @@
                                -fx-cursor: hand;
                                -fx-effect: dropshadow(gaussian, rgba(26,95,180,0.3), 6, 0, 0, 3);"/>
             </VBox>
-
         </VBox>
     </VBox>
 </AnchorPane>

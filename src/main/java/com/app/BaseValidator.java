@@ -3,23 +3,19 @@ package com.app;
 import java.util.ArrayList;
 import java.util.List;
 
-// Interface (polymorphism)
 interface PasswordRule {
     boolean validate(String text);
     String getDescription();
 }
 
-// Abstract class
 public abstract class BaseValidator {
 
     protected List<PasswordRule> rules = new ArrayList<>();
 
-    // --- FIX: interface dipindah ke sini, bukan di dalam Rule ---
     protected interface Validation {
         boolean check(String text);
     }
 
-    // Nested Class
     protected class Rule implements PasswordRule {
 
         private final String description;

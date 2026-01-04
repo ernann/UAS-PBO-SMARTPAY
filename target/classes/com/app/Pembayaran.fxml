@@ -64,14 +64,12 @@
                                        -fx-effect: dropshadow(gaussian, rgba(31, 91, 180, 0.3), 8, 0, 0, 2);" />
                     </VBox>
 
-                    <!-- Label Riwayat -->
                     <Label text="Riwayat Penerima"
                            style="-fx-font-size: 18px;
                                   -fx-font-weight: bold;
                                   -fx-text-fill: #0B2A72;"
                            alignment="CENTER_LEFT" />
 
-                    <!-- ListView -->
                     <ListView fx:id="listRiwayat"
                               prefHeight="250"
                               prefWidth="200"
@@ -88,16 +86,13 @@
                         </padding>
                     </ListView>
 
-                    <!-- Info Footer -->
                     <Label text="Pilih penerima untuk melanjutkan transfer"
                            style="-fx-font-size: 14px;
                                   -fx-text-fill: #666;
                                   -fx-font-style: italic;"
                            alignment="CENTER" />
-
                 </VBox>
             </content>
         </ScrollPane>
     </children>
-
 </AnchorPane>

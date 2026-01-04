@@ -1,4 +1,4 @@
-package com.app;
+package com.app.Registrasi;
 
 public class LoginSession {
     private static String lastSmartId;

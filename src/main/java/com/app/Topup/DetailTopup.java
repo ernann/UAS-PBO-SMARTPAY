@@ -1,6 +1,12 @@
-package com.app;
+package com.app.Topup;
 
 import java.util.Random;
+
+import com.app.App;
+import com.app.HomeController;
+import com.app.SaldoManager;
+import com.app.TransaksiStorage;
+import com.app.UserData;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class AlfatopupController {
+public class DetailTopup {
 
     @FXML private TextField txtNominal;
     @FXML private Label lblSaldoHeader;
@@ -26,10 +32,9 @@ public class AlfatopupController {
 
     @FXML
     public void initialize() {
-        System.out.println("=== ALFATOPUP CONTROLLER INITIALIZE ===");
+        System.out.println("=== DETAIL TOPUP CONTROLLER INITIALIZE ===");
         
         try {
-            // Ambil data dari TempData
             String metode = TempData.getMetodeTopup();
             String judul = TempData.getJudulTopup();
             String icon = TempData.getIconMetode();
@@ -42,7 +47,6 @@ public class AlfatopupController {
             System.out.println("  Judul: " + judul);
             System.out.println("  Nominal: " + nominal);
             
-            // Update UI
             if (labelJudul != null) labelJudul.setText(judul);
             if (labelIcon != null) labelIcon.setText(icon);
             if (labelInfoMetode != null) labelInfoMetode.setText(info);
@@ -56,10 +60,9 @@ public class AlfatopupController {
             
             txtNominal.requestFocus();
             
-            // Generate kode pembayaran
             generatePaymentCode(metode);
             
-            System.out.println("✓ AlfatopupController initialized successfully");
+            System.out.println("✓ DetailTopup initialized successfully");
             
         } catch (Exception e) {
             System.err.println("❌ ERROR: " + e.getMessage());
@@ -117,10 +120,8 @@ public class AlfatopupController {
 
             String metode = TempData.getMetodeTopup();
             
-            // Update nominal di TempData
             TempData.setNominalTopup(nominal);
 
-            // Tampilkan kode pembayaran dan minta input
             showPaymentCodeAndInput(metode, nominal);
 
         } catch (NumberFormatException e) {
@@ -153,9 +154,8 @@ public class AlfatopupController {
     
     private void showPaymentCodeAndInput(String metode, long nominal) {
         try {
-            // Tampilkan kode pembayaran dalam dialog khusus
             Stage codeStage = new Stage();
-            codeStage.setTitle("Kode Pembayaran");
+            codeStage.setTitle("SmartPay");
             codeStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
             
             VBox mainBox = new VBox(20);
@@ -165,7 +165,6 @@ public class AlfatopupController {
                 "-fx-alignment: center;"
             );
             
-            // Header
             VBox headerBox = new VBox(10);
             headerBox.setStyle("-fx-alignment: center;");
             
@@ -177,7 +176,6 @@ public class AlfatopupController {
             
             headerBox.getChildren().addAll(lblHeader, lblSubHeader);
             
-            // Card Kode
             VBox cardBox = new VBox(20);
             cardBox.setPrefWidth(400);
             cardBox.setStyle(
@@ -187,7 +185,6 @@ public class AlfatopupController {
                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.5, 0, 3);"
             );
             
-            // Info transaksi
             VBox infoBox = new VBox(15);
             
             String[][] infoData = {
@@ -212,7 +209,6 @@ public class AlfatopupController {
             
             cardBox.getChildren().add(infoBox);
             
-            // KODE PEMBAYARAN BESAR
             VBox codeDisplayBox = new VBox(10);
             codeDisplayBox.setStyle("-fx-alignment: center; -fx-padding: 20px; -fx-background-color: #f8fbff; -fx-border-radius: 10px;");
             
@@ -228,11 +224,9 @@ public class AlfatopupController {
             codeDisplayBox.getChildren().addAll(lblCodeTitle, lblCode, lblInstruction);
             cardBox.getChildren().add(codeDisplayBox);
             
-            // Tombol Salin dan Lanjut
             VBox buttonBox = new VBox(10);
             buttonBox.setStyle("-fx-alignment: center; -fx-padding: 10px 0 0 0;");
             
-            // Tombol Salin Kode
             Button btnSalin = new Button("📋 Salin Kode");
             btnSalin.setPrefWidth(300);
             btnSalin.setPrefHeight(35);
@@ -258,7 +252,6 @@ public class AlfatopupController {
                 copiedAlert.showAndWait();
             });
             
-            // Tombol Lanjut ke Input Kode
             Button btnLanjut = new Button("✅ Saya Sudah Bayar, Lanjut Konfirmasi");
             btnLanjut.setPrefWidth(300);
             btnLanjut.setPrefHeight(35);
@@ -287,14 +280,12 @@ public class AlfatopupController {
         } catch (Exception e) {
             System.err.println("Error menampilkan kode: " + e.getMessage());
             e.printStackTrace();
-            // Fallback ke dialog biasa
             showInputCodeDialog(metode, nominal);
         }
     }
     
     private void showInputCodeDialog(String metode, long nominal) {
         try {
-            // Tampilkan kode lagi sebelum minta input
             Alert reminderAlert = new Alert(Alert.AlertType.INFORMATION);
             reminderAlert.setTitle("Ingat Kode Anda");
             reminderAlert.setHeaderText("Kode Pembayaran Anda:");
@@ -304,7 +295,6 @@ public class AlfatopupController {
             );
             reminderAlert.showAndWait();
             
-            // Minta input kode
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Konfirmasi Pembayaran");
             dialog.setHeaderText("Masukkan Kode Pembayaran");
@@ -317,17 +307,15 @@ public class AlfatopupController {
                 
                 if (inputKode.isEmpty()) {
                     showAlert("Gagal", "Kode tidak boleh kosong!");
-                    showInputCodeDialog(metode, nominal); // Coba lagi
+                    showInputCodeDialog(metode, nominal);
                     return;
                 }
                 
-                // Validasi kode
                 if (inputKode.equals(kodePembayaran)) {
-                    // Proses top up berhasil
                     processSuccessfulPayment(metode, nominal);
                 } else {
                     showAlert("Gagal", "Kode salah! Coba lagi.");
-                    showInputCodeDialog(metode, nominal); // Coba lagi
+                    showInputCodeDialog(metode, nominal); 
                 }
             } else {
                 showAlert("Dibatalkan", "Pembayaran dibatalkan.");
@@ -343,20 +331,16 @@ public class AlfatopupController {
     }
     
     private void processSuccessfulPayment(String metode, long nominal) {
-        // Generate kode transaksi
         String kodeTransaksi = "TRX" + (System.currentTimeMillis() % 1000000);
         
-        // Tambah saldo
         SaldoManager.tambahSaldo(nominal);
         updateSaldoLabel();
 
-        // Update HomeController
         HomeController home = App.getHomeController();
         if (home != null) {
             home.updateSaldoHome();
         }
 
-        // Simpan ke riwayat
         String userId = UserData.getSmartId();
         if (userId != null && !userId.isEmpty()) {
             TransaksiStorage.tambahTransaksi(
@@ -369,14 +353,13 @@ public class AlfatopupController {
             );
         }
 
-        // Tampilkan bukti transaksi
         showProofOfPayment(metode, nominal, kodeTransaksi);
     }
     
     private void showProofOfPayment(String metode, long nominal, String kodeTransaksi) {
         try {
             Stage buktiStage = new Stage();
-            buktiStage.setTitle("Bukti Top Up");
+            buktiStage.setTitle("SmartPay");
             buktiStage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
             
             VBox mainBox = new VBox(20);
@@ -386,7 +369,6 @@ public class AlfatopupController {
                 "-fx-alignment: center;"
             );
             
-            // Header
             VBox headerBox = new VBox(10);
             headerBox.setStyle("-fx-alignment: center;");
             
@@ -398,7 +380,6 @@ public class AlfatopupController {
             
             headerBox.getChildren().addAll(lblHeader, lblSub);
             
-            // Card bukti
             VBox cardBox = new VBox(15);
             cardBox.setStyle(
                 "-fx-background-color: white; " +
@@ -408,11 +389,9 @@ public class AlfatopupController {
             );
             cardBox.setPrefWidth(350);
             
-            // Title
             javafx.scene.control.Label lblTitle = new javafx.scene.control.Label("BUKTI TRANSAKSI");
             lblTitle.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1a5fb4; -fx-alignment: center;");
             
-            // Detail transaksi
             VBox detailBox = new VBox(10);
             detailBox.setStyle("-fx-padding: 15px 0;");
             
@@ -444,7 +423,6 @@ public class AlfatopupController {
                 detailBox.getChildren().add(rowBox);
             }
             
-            // Tombol Selesai
             javafx.scene.control.Button btnSelesai = new javafx.scene.control.Button("SELESAI");
             btnSelesai.setPrefWidth(300);
             btnSelesai.setPrefHeight(40);
@@ -472,7 +450,6 @@ public class AlfatopupController {
         } catch (Exception e) {
             System.err.println("Error tampilkan bukti: " + e.getMessage());
             
-            // Fallback simple
             showAlert("Top Up Berhasil", 
                 "✅ Top Up Berhasil!\n\n" +
                 "Metode: " + metode + "\n" +

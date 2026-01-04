@@ -3,6 +3,8 @@ package com.app.Transfer;
 import java.util.Optional;
 
 import com.app.App;
+import com.app.BaseController;  
+
 import com.app.SaldoManager;
 import com.app.TransaksiStorage;
 import com.app.UserData;
@@ -15,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 
-public class FormPembayaranController {
+public class FormPembayaranController extends BaseController {
 
     @FXML private TextField tfNama, tfNoRek, tfNominal;
     @FXML private ComboBox<String> cbBank;
@@ -103,7 +105,6 @@ public class FormPembayaranController {
         System.out.println("=== TOMBOL BAYAR DIKLIK ===");
         System.out.println("Event source: " + event.getSource());
         
-        // Cek saldo pengirim terlebih dahulu
         long saldoPengirim = SaldoManager.getSaldo();
         System.out.println("Saldo pengirim: " + SaldoManager.formatSaldo());
         
@@ -236,7 +237,6 @@ public class FormPembayaranController {
             if (UserData.validatePin(pin)) {
                 System.out.println("PIN BENAR!");
                 
-                // Hitung total termasuk admin
                 long totalBayar = nominal + PembayaranData.getAdmin();
                 
                 boolean saldoCukup = SaldoManager.kurangiSaldo(totalBayar);
@@ -248,13 +248,11 @@ public class FormPembayaranController {
                 }
                 System.out.println("Saldo berhasil dikurangi");
                 
-                // ======== SIMPAN RIWAYAT TRANSAKSI ========
                 String userId = UserData.getSmartId();
                 if (userId != null && !userId.isEmpty()) {
-                    // Generate kode transaksi unik
+
                     String kodeTransaksi = "TRF-" + System.currentTimeMillis() % 100000;
                     
-                    // Simpan sebagai PENGELUARAN untuk pengirim
                     TransaksiStorage.tambahTransaksi(
                         "TRANSFER", 
                         "Transfer ke " + tfNama.getText() + " (" + bank + ")", 
@@ -265,18 +263,15 @@ public class FormPembayaranController {
                     );
                     System.out.println("✓ Transfer OUT ditambahkan ke riwayat: " + kodeTransaksi);
                     
-                    // Jika transfer ke SmartPay, tambahkan juga sebagai PEMASUKAN untuk penerima
                     if (bank.equals("SmartPay")) {
-                        // Cari user penerima berdasarkan nomor rekening
                         com.app.User penerima = com.app.UserDatabase.getUserByRekening(noRek);
                         if (penerima != null) {
-                            // Tambah saldo penerima
+
                             penerima.tambahSaldo(nominal);
                             com.app.UserDatabase.updateUser(penerima);
                             System.out.println("✓ Saldo penerima ditambah: " + penerima.getNama() + 
                                              " +" + nominal + ", total: " + penerima.getSaldoFormatted());
                             
-                            // Simpan sebagai PEMASUKAN untuk penerima
                             String kodeTransaksiPenerima = "TRF-IN-" + System.currentTimeMillis() % 100000;
                             TransaksiStorage.tambahTransaksi(
                                 "TRANSFER", 
@@ -290,7 +285,6 @@ public class FormPembayaranController {
                         }
                     }
                     
-                    // Jika ada biaya admin, simpan juga sebagai transaksi admin
                     if (PembayaranData.getAdmin() > 0) {
                         String kodeAdmin = "ADM-" + System.currentTimeMillis() % 100000;
                         TransaksiStorage.tambahTransaksi(
@@ -304,7 +298,6 @@ public class FormPembayaranController {
                         System.out.println("✓ Biaya admin ditambahkan ke riwayat");
                     }
                 }
-                // ===========================================
                 
                 PembayaranData.setNama(tfNama.getText());
                 PembayaranData.setBank(bank);
@@ -319,15 +312,18 @@ public class FormPembayaranController {
                 System.out.println("  Admin: " + PembayaranData.getAdmin());
                 System.out.println("  Total: " + PembayaranData.getTotal());
                 
-                // Tambah ke riwayat pembayaran
                 RiwayatItem newItem = new RiwayatItem(
                     PembayaranData.getNama(),
                     PembayaranData.getBank(),
                     PembayaranData.getNoRek()
                 );
-                RiwayatPembayaran.tambah(newItem);
+                RiwayatPembayaran.tambah(
+                    UserData.getSmartId(),
+                    newItem
+                );
                 System.out.println("Ditambahkan ke riwayat pembayaran: " + newItem);
-                
+                System.out.println("SIMPAN RIWAYAT UNTUK: " + UserData.getSmartId());
+
                 System.out.println("Pindah ke BuktiTransaksi...");
                 App.setRoot("BuktiTransaksi");
                 
@@ -338,14 +334,5 @@ public class FormPembayaranController {
         } else {
             System.out.println("PIN dialog dibatalkan");
         }
-    }
-
-    private void showError(String msg) {
-        System.out.println("Menampilkan error: " + msg);
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Gagal");
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
     }
 }

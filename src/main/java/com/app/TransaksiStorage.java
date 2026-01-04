@@ -18,17 +18,16 @@ public class TransaksiStorage {
         loadTransaksi();
     }
 
-    // Inner class untuk record transaksi
     public static class TransaksiRecord implements Serializable {
         private static final long serialVersionUID = 1L;
         
-        private String jenis; // "TOPUP", "TRANSFER", "PAYMENT"
+        private String jenis;
         private String deskripsi;
-        private String tipe; // "PEMASUKAN" atau "PENGELUARAN"
+        private String tipe;
         private long jumlah;
         private LocalDateTime waktu;
         private String kodeTransaksi;
-        private String userId; // Smart ID pengguna
+        private String userId; 
         
         public TransaksiRecord(String jenis, String deskripsi, String tipe, long jumlah, 
                               LocalDateTime waktu, String kodeTransaksi, String userId) {
@@ -41,7 +40,6 @@ public class TransaksiStorage {
             this.userId = userId;
         }
         
-        // Getters
         public String getJenis() { return jenis; }
         public String getDeskripsi() { return deskripsi; }
         public String getTipe() { return tipe; }
@@ -67,7 +65,6 @@ public class TransaksiStorage {
         }
     }
 
-    // ============== METHOD PUBLIC ==============
     
     public static void tambahTransaksi(String jenis, String deskripsi, String tipe, 
                                       long jumlah, String kodeTransaksi, String userId) {
@@ -100,7 +97,6 @@ public class TransaksiStorage {
         System.out.println("✓ Data dummy dihapus");
     }
     
-    // ============== METHOD PRIVATE ==============
     
     @SuppressWarnings("unchecked")
     private static void loadTransaksi() {

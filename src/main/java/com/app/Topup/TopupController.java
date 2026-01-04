@@ -1,6 +1,9 @@
-package com.app;
+package com.app.Topup;
 
 import java.util.Optional;
+
+import com.app.App;
+import com.app.SaldoManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -131,12 +134,11 @@ public class TopupController {
         if (nominalOpt.isPresent()) {
             long nominal = nominalOpt.get();
             
-            // Show confirmation
             boolean confirmed = showConfirmationDialog(metode, nominal);
             
             if (confirmed) {
                 setDataKeTempData(metode, nominal, icon);
-                App.setRoot("AlfaTopup");
+                App.setRoot("DetailTopup");
             } else {
                 System.out.println("Top up dibatalkan oleh user");
             }

@@ -4,14 +4,13 @@ public class SaldoManager {
     static long saldo = 0;
 
     public static long getSaldo() {
-        // Sinkron dengan UserData
         saldo = UserData.getSaldo();
         return saldo;
     }
 
     public static void setSaldo(long newSaldo) {
         saldo = newSaldo;
-        UserData.setSaldo(newSaldo); // Sinkron dengan UserData
+        UserData.setSaldo(newSaldo); 
         updateDatabaseSaldo();
         System.out.println("✓ SaldoManager: Saldo diupdate menjadi " + formatSaldo(newSaldo));
     }
@@ -24,7 +23,7 @@ public class SaldoManager {
         }
 
         saldo -= jumlah;
-        UserData.setSaldo(saldo); // Sinkron dengan UserData
+        UserData.setSaldo(saldo);
         updateDatabaseSaldo();
 
         System.out.println("✓ SaldoManager: Saldo dikurangi " + formatSaldo(jumlah) +
@@ -35,7 +34,7 @@ public class SaldoManager {
     public static void tambahSaldo(long jumlah) {
         if (jumlah > 0) {
             saldo += jumlah;
-            UserData.setSaldo(saldo); // Sinkron dengan UserData
+            UserData.setSaldo(saldo); 
             updateDatabaseSaldo();
 
             System.out.println("✓ SaldoManager: Saldo ditambah " + formatSaldo(jumlah) +

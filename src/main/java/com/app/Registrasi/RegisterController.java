@@ -1,6 +1,11 @@
-package com.app;
+package com.app.Registrasi;
 
 import java.util.Optional;
+
+import com.app.App;
+import com.app.User;
+import com.app.UserData;
+import com.app.UserDatabase;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

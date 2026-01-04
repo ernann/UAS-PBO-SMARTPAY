@@ -17,10 +17,9 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
-        stage.setTitle("SmartPay - Aplikasi Transaksi & Riwayat");
+        stage.setTitle("SmartPay");
         stage.setResizable(false);
 
-        // SET UKURAN TETAP
         stage.setMinWidth(400);
         stage.setMinHeight(700);
         stage.setMaxWidth(400);
@@ -28,7 +27,6 @@ public class App extends Application {
 
         System.out.println("=== MEMUAT LOGIN SCREEN ===");
         
-        // Load Login sebagai halaman pertama
         try {
             Parent root = loadFXML("Login");
             scene = new Scene(root, 400, 700);

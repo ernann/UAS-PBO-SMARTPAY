@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="500" prefWidth="500"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.app.LoginController"
+            fx:controller="com.app.Registrasi.LoginController"
             style="-fx-background-color: #165497ff;">
     
     <VBox alignment="CENTER" spacing="5.0" 
@@ -35,9 +35,6 @@
                            style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #0d47a1; -fx-padding: 12 15; -fx-font-size: 14px;"
                            prefWidth="280.0" />
             
-            <Hyperlink text="Lupa Password?" onAction="#handleForgotPassword"
-                       style="-fx-text-fill: #2059adff; -fx-font-size: 12px; -fx-padding: 5 0;" />
-            
             <Button text="Login" onAction="#handleLogin"
                     style="-fx-background-color: #275daeff; -fx-text-fill: #cae3ffff; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 10;"
                     prefWidth="280.0" prefHeight="45.0">
@@ -45,12 +42,7 @@
                     <Insets top="10.0" bottom="10.0" left="20.0" right="20.0" />
                 </padding>
             </Button>
-            
-            <Separator prefWidth="200.0">
-                <VBox.margin>
-                    <Insets top="10.0" bottom="10.0" />
-                </VBox.margin>
-            </Separator>
+        
             
             <Label text="Belum punya akun?" 
                    style="-fx-text-fill: #666; -fx-font-size: 14px;" />
@@ -62,7 +54,6 @@
                     <Insets top="10.0" bottom="10.0" left="20.0" right="20.0" />
                 </padding>
             </Button>
-            
         </VBox>
         
         <Label text="© 2024 SmartPay. All rights reserved." 

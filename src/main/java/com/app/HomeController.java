@@ -28,7 +28,6 @@ public class HomeController {
     public void initialize() {
         System.out.println("=== HOME CONTROLLER INITIALIZE ===");
         
-        // Load user data
         if (UserData.getNama() != null && !UserData.getNama().isEmpty()) {
             labelNama.setText("Hello, " + UserData.getNama());
         } else {
@@ -43,74 +42,74 @@ public class HomeController {
         
         labelSaldo.setText(SaldoManager.formatSaldo());
         
-        // Set tooltip for logout button
         Tooltip logoutTooltip = new Tooltip("Logout");
         logoutTooltip.setStyle("-fx-font-size: 12px; -fx-background-color: #333; -fx-text-fill: white;");
         btnLogout.setTooltip(logoutTooltip);
         
         System.out.println("✓ HomeController initialized successfully");
         
-        // Check for reminders
         checkAndShowReminders();
     }
     
-    private void checkAndShowReminders() {
-        if (hasShownReminder) {
-            return;
-        }
-        
-        String smartId = UserData.getSmartId();
-        if (smartId == null || smartId.isEmpty()) {
-            return;
-        }
-        
-        List<Reminder> userReminders = ReminderStorage.loadForUser(smartId);
-        List<Reminder> activeReminders = userReminders.stream()
-                .filter(r -> !r.getJatuhTempo().isAfter(LocalDate.now()))
-                .collect(java.util.stream.Collectors.toList());
-        
-        if (activeReminders.isEmpty()) {
-            return;
-        }
-        
-        StringBuilder reminderMessage = new StringBuilder();
-        reminderMessage.append("📌 Anda memiliki ")
-                .append(activeReminders.size())
-                .append(" tagihan:\n\n");
-        
-        for (Reminder r : activeReminders) {
-            LocalDate dueDate = r.getJatuhTempo();
-            LocalDate today = LocalDate.now();
-            
-            String status;
-            if (dueDate.isBefore(today)) {
-                long daysLate = java.time.temporal.ChronoUnit.DAYS.between(dueDate, today);
-                status = "TERLAMBAT " + daysLate + " hari";
-            } else {
-                status = "HARI INI";
-            }
-            
-            reminderMessage.append("• ")
-                    .append(r.getJenis())
-                    .append(" - ")
-                    .append(r.getFormattedNominal())
-                    .append("\n   Jatuh tempo: ")
-                    .append(dueDate)
-                    .append(" (")
-                    .append(status)
-                    .append(")\n\n");
-        }
-        
-        javafx.application.Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Pengingat Tagihan");
-            alert.setHeaderText("Reminder Pembayaran");
-            alert.setContentText(reminderMessage.toString());
-            alert.show();
-        });
-        
-        hasShownReminder = true;
+   private void checkAndShowReminders() {
+
+    if (UserData.isReminderNotifShown()) {
+        return;
     }
+
+    String smartId = UserData.getSmartId();
+    if (smartId == null || smartId.isEmpty()) {
+        return;
+    }
+
+    List<Reminder> userReminders = ReminderStorage.loadForUser(smartId);
+    List<Reminder> activeReminders = userReminders.stream()
+            .filter(r -> !r.getJatuhTempo().isAfter(LocalDate.now()))
+            .collect(java.util.stream.Collectors.toList());
+
+    if (activeReminders.isEmpty()) {
+        return;
+    }
+
+    StringBuilder reminderMessage = new StringBuilder();
+    reminderMessage.append("📌 Anda memiliki ")
+            .append(activeReminders.size())
+            .append(" tagihan:\n\n");
+
+    for (Reminder r : activeReminders) {
+        LocalDate dueDate = r.getJatuhTempo();
+        LocalDate today = LocalDate.now();
+
+        String status;
+        if (dueDate.isBefore(today)) {
+            long daysLate = java.time.temporal.ChronoUnit.DAYS.between(dueDate, today);
+            status = "TERLAMBAT " + daysLate + " hari";
+        } else {
+            status = "HARI INI";
+        }
+
+        reminderMessage.append("• ")
+                .append(r.getJenis())
+                .append(" - ")
+                .append(r.getFormattedNominal())
+                .append("\n   Jatuh tempo: ")
+                .append(dueDate)
+                .append(" (")
+                .append(status)
+                .append(")\n\n");
+    }
+
+    javafx.application.Platform.runLater(() -> {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Pengingat Tagihan");
+        alert.setHeaderText("Reminder Pembayaran");
+        alert.setContentText(reminderMessage.toString());
+        alert.show();
+
+        UserData.setReminderNotifShown(true);
+    });
+}
+
     
     @FXML
     public void handleLogout() {
@@ -150,7 +149,6 @@ public class HomeController {
         System.out.println("Smart ID: " + UserData.getSmartId());
         
         try {
-            // Gunakan method khusus untuk riwayat
             App.showRiwayat();
         } catch (Exception e) {
             System.err.println("✗ Gagal navigasi ke Riwayat: " + e.getMessage());

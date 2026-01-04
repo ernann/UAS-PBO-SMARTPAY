@@ -1,5 +1,6 @@
 package com.app.Transfer;
 import com.app.App;
+import com.app.UserData;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,10 +42,17 @@ public class PembayaranController {
             System.out.println("listRiwayat is OK");
         }
         
-        System.out.println("Jumlah riwayat di RiwayatPembayaran: " + RiwayatPembayaran.getList().size());
-        
-        listRiwayat.getItems().setAll(RiwayatPembayaran.getList());
-        
+       String smartId = UserData.getSmartId();
+
+        listRiwayat.getItems().setAll(
+            RiwayatPembayaran.getListByUser(smartId)
+        );
+
+        System.out.println(
+            "Jumlah riwayat user (" + smartId + "): " +
+            RiwayatPembayaran.getListByUser(smartId).size()
+        );
+
         System.out.println("Jumlah item di ListView: " + listRiwayat.getItems().size());
         
         listRiwayat.setOnMouseClicked(e -> {
@@ -68,7 +76,7 @@ public class PembayaranController {
                 System.out.println("Tidak ada item yang dipilih");
             }
         });
-        
+        System.out.println("LOAD RIWAYAT UNTUK: " + UserData.getSmartId());
         System.out.println("=== INITIALIZE SELESAI ===");
     }
 }
