@@ -9,8 +9,11 @@ import com.app.UserDatabase;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.VBox;
 
 public class LoginController {
     
@@ -68,10 +71,69 @@ public class LoginController {
         }
     }
     
-    @FXML
-    private void handleForgotPassword() {
-        showAlert("Lupa Password", "Fitur ini belum tersedia. Hubungi admin.");
-    }
+  @FXML
+private void handleForgotPassword() {
+
+    TextInputDialog dialog = new TextInputDialog();
+    dialog.setTitle("Forgot Password");
+    dialog.setHeaderText("Reset Password");
+    dialog.setContentText("Masukkan Email atau Smart ID:");
+
+    dialog.showAndWait().ifPresent(input -> {
+        input = input.trim();
+
+        if (input.isEmpty()) {
+            showAlert("Error", "Email atau Smart ID tidak boleh kosong!");
+            return;
+        }
+
+        User user = UserDatabase.getUser(input);
+
+        if (user == null) {
+            showAlert("Gagal", "User tidak ditemukan!");
+            return;
+        }
+
+        PasswordField pfNew = new PasswordField();
+        pfNew.setPromptText("Password baru");
+
+        PasswordField pfConfirm = new PasswordField();
+        pfConfirm.setPromptText("Konfirmasi password");
+
+        VBox box = new VBox(10, pfNew, pfConfirm);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Reset Password");
+        alert.setHeaderText("Masukkan password baru");
+        alert.getDialogPane().setContent(box);
+
+        alert.showAndWait().ifPresent(btn -> {
+            if (btn == ButtonType.OK) {
+                String newPass = pfNew.getText();
+                String confirm = pfConfirm.getText();
+
+                PasswordValidator validator = new PasswordValidator();
+
+                if (!validator.validatePassword(newPass)) {
+                    showAlert("Password Lemah",
+                            String.join("\n", validator.getPasswordRequirements()));
+                    return;
+                }
+
+                if (!newPass.equals(confirm)) {
+                    showAlert("Error", "Konfirmasi password tidak cocok!");
+                    return;
+                }
+
+                user.setPassword(newPass);
+                UserDatabase.updateUser(user);
+
+                showAlert("Berhasil", "Password berhasil direset.\nSilakan login kembali.");
+            }
+        });
+    });
+}
+
     
     @FXML
     private void handleRegister() {
